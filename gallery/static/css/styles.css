@@ -14,7 +14,6 @@ svg:hover, svg:active{
   overflow: hidden;
 }
 svg{
-
   margin: 0 5px;
 }
 nav>form>input{
@@ -41,9 +40,52 @@ nav{
   height: 18vh;
   background-color: white;
   border: 1px solid rgb(200, 200, 200);
+  margin-bottom: 30px;
 }
 
 /*styling for body*/
 .pinsta{
   padding: 20px;
+}
+.card{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.card-header{
+  height: 60px;
+}
+.card-header>img{
+  margin: auto 2px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.card-footer{
+  padding-bottom: -30px;
+}
+.card-image{
+  height: 110vh;
+  padding: 0;
+}
+.card-image>img{
+  width: auto;
+  height: 100%;
+  
+
+}
+.bold{
+  font-weight: bold;
+}
+.ellip{
+  font-size: 1.6em;
+  text-decoration: none;
+  color: black;
+}
+.ellip>a{
+  color: black;
+}
+.ellip>a:hover{
+  text-decoration: none;
+  color: blue;
 }

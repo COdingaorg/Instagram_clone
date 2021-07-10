@@ -67,12 +67,22 @@ nav{
 .card-image{
   height: 110vh;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0px;
 }
 .card-image>img{
   width: auto;
   height: 100%;
-  
-
+}
+.post_comment{
+  color: rgb(66,139,202);
+  border: 0px solid rgb(66,139,202);
+  background-color: white;
+  font-size: 1.2em;
+  line-break: loose;
 }
 .bold{
   font-weight: bold;
@@ -88,4 +98,7 @@ nav{
 .ellip>a:hover{
   text-decoration: none;
   color: blue;
+}
+.card-footer>form>input, .card-footer>form>input:hover, .card-footer>form>input:active{
+  border: 0 solid white;
 }

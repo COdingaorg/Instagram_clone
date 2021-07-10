@@ -132,8 +132,14 @@ input {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: flex-end;
-
+	justify-content: flex-start;
+}
+.former>p{
+  margin: 1px 5px;
+  text-align: left;
+}
+.sign-in-container>form>button{
+  margin-top: 30px;
 }
 .container.right-panel-active .sign-up-container {
 	transform: translateX(100%);

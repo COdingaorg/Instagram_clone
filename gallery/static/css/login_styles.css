@@ -5,7 +5,15 @@
 * {
 	box-sizing: border-box;
 }
-
+/*styling nav*/
+nav.navbar{
+  font-family: 'Zen Loop', cursive;
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  border-bottom: 1px solid grey;
+	z-index: 2;
+}
 body {
 	background: #f6f5f7;
 	display: flex;

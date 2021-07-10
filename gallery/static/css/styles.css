@@ -19,12 +19,13 @@ svg{
 nav>form>input{
   width: 20px;
 }
-nav{
+nav.navbar{
   font-family: 'Zen Loop', cursive;
   position: fixed;
   top: 0%;
   width: 100%;
   border-bottom: 1px solid grey;
+  z-index: 2;
 }
 .nav-brand{
   font-family: 'Festive', cursive;
@@ -45,7 +46,9 @@ nav{
 
 /*styling for body*/
 .pinsta{
+  z-index: -1;
   padding: 20px;
+  margin-top: 10vh;
 }
 .card{
   margin-top: 10px;
@@ -106,6 +109,8 @@ nav{
 /*styling suggestion section*/
 .follow-section{
   padding: 15px 8px;
+  position: fixed;
+  right: 20%;
 }
 .account{
   height: 10vh;

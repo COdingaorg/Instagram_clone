@@ -9,11 +9,12 @@
 {%endblock%}
 
 {% block content%}
-<h1>Pinstagram</h1>
+<h1 class="nav-brand">Pinstagram</h1>
 <div class="container" id="container">
   
   <div class="form-container sign-in-container">
     <form action="{% url 'login'%}" method="POST">
+      <p class="alert-info">{{ form.errors }}</p>
       {%csrf_token%}
       <h1>Sign in</h1>
       {% for message in messages%}

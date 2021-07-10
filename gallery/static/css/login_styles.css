@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Festive&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -95,11 +97,21 @@ input {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
+	overflow-y: scroll;
 	width: 768px;
 	max-width: 100%;
 	min-height: 480px;
 }
-
+nav{
+  font-family: 'Zen Loop';
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  border-bottom: 1px solid grey;
+}
+.nav-brand{
+  font-family: 'Festive', cursive;
+}
 .form-container {
 	position: absolute;
 	top: 0;

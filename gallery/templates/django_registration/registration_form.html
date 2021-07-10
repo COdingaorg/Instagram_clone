@@ -9,32 +9,35 @@
 {%endblock%}
 
 {% block content %}
-<h1 class="text-center">Pinstagram</h1>
+<h1 class="text-center nav-brand">Pinstagram</h1>
 <div class="container" id="container">
-  <div clas s="form-container sign-up-container">
-    <form action="#" method="POST">
-      {%csrf_token%}
-      {{forms.errors}}
 
-    </form>
-  </div>
   <div class="form-container sign-in-container">
-    <form action="{% url 'django_registration_register'  %}" method="POST">
-      {%csrf_token%}
-      {{forms.errors}}
-      {% for message in messages%}
-      <p class="alert-info text-center">{{message}}</p>
-      {%endfor%}
+    <form action="#" method="POST">
       <!--Create account form -->
       <h2>Create Account</h2>
-
+      <p class="alert-info">{{ form.errors }}</p>
+      {%csrf_token%}
+      
       <!--forms from views-->
-      <span class="former"><p>{{form.username.label}}:</p>{{form.username}}</span>
-      <span class="former"><p>{{form.first_name.label}}:</p>{{form.first_name}}</span>
-      <span class="former"><p>{{form.last_name.label}}:</p>{{form.last_name}}</span>
-      <span class="former"><p>{{form.email.label}}:</p>{{form.email}}</span>
-      <span class="former"><p>{{form.password1.label}}     :  </p>{{form.password1}}</span>
-      <span class="former"><p>{{form.password2.label}}:</p>{{form.password2}}</span>
+      <span class="former">
+        <p>{{form.username.label}}:</p>{{form.username}}
+      </span>
+      <span class="former">
+        <p>{{form.first_name.label}}:</p>{{form.first_name}}
+      </span>
+      <span class="former">
+        <p>{{form.last_name.label}}:</p>{{form.last_name}}
+      </span>
+      <span class="former">
+        <p>{{form.email.label}}:</p>{{form.email}}
+      </span>
+      <span class="former">
+        <p>{{form.password1.label}} : </p>{{form.password1}}
+      </span>
+      <span class="former">
+        <p>{{form.password2.label}}:</p>{{form.password2}}
+      </span>
       <button type="submit">Create Account</button>
     </form>
   </div>

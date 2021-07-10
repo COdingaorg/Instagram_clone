@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Festive&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -18,8 +20,12 @@ nav>form>input{
   width: 20px;
 }
 nav{
+  font-family: 'Zen Loop', cursive;
   position: fixed;
   top: 0%;
   width: 100%;
   border-bottom: 1px solid grey;
+}
+.nav-brand{
+  font-family: 'Festive', cursive;
 }

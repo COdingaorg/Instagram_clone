@@ -1,3 +1,25 @@
-h1{
-  color: red;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+	box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+svg:hover, svg:active{
+  background-color: black;
+  fill: white;
+  border-radius: 15px;
+  overflow: hidden;
+}
+svg{
+
+  margin: 0 5px;
+}
+nav>form>input{
+  width: 20px;
+}
+nav{
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  border-bottom: 1px solid grey;
 }

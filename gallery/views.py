@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from .forms import RegisterNewUser
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -18,12 +20,25 @@ def register_user(request):
   view function that displays to register page,  
   '''
   title = 'Register - Pinstagram'
+  
+  if request.method == 'POST':
+    form = RegisterNewUser(request.POST)
+    if form.is_valid():
+      form.save()
+      messages.success(request, 'Account Created Successfully!')
+
+      return redirect('login')
+  
+  else:
+    form = RegisterNewUser
+
 
   context = {
-    'title':title
+    'title':title,
+    'form':form,
   }
 
-  return render(request, 'django_registration/register.html', context)
+  return render(request, 'django_registration/registration_form.html', context)
 
 def login_user(request):
   '''

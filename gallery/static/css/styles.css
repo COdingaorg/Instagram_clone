@@ -102,3 +102,25 @@ nav{
 .card-footer>form>input, .card-footer>form>input:hover, .card-footer>form>input:active{
   border: 0 solid white;
 }
+
+/*styling suggestion section*/
+.follow-section{
+  padding: 15px 8px;
+}
+.account{
+  height: 10vh;
+  overflow: visible;
+}
+.all_names{
+  color: grey;
+}
+.profileimage{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 1px solid rgb(200, 200, 200);
+  overflow: hidden;
+}
+.profileimage>img{
+  width: 100%;
+}

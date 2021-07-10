@@ -1,19 +1,9 @@
 from django.shortcuts import redirect, render
 from .forms import RegisterNewUser
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-#index view function
-def index(request):
-  '''
-  View function that displays to index template
-  '''
-  title = 'Pinstagram - Home'
-  context = {
-    'title':title
-  }
-  return render(request, 'app_templates/index.html', context)
-
 #register user view function
 def register_user(request):
   '''
@@ -33,3 +23,16 @@ def register_user(request):
     'form':form,
   }
   return render(request, 'django_registration/registration_form.html', context)
+
+#index view function
+@login_required(login_url=('login'))
+def index(request):
+  '''
+  View function that displays to index template
+  '''
+  title = 'Pinstagram - Home'
+  context = {
+    'title':title
+  }
+  return render(request, 'app_templates/index.html', context)
+

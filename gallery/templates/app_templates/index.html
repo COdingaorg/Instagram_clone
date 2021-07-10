@@ -4,8 +4,48 @@
 {% load mathfilters %}
 
 {% block content%}
-{% include 'app_templates/navbar.html' %}
 
-<h1 class="text-center">WELCOME HOME</h1>
+<div class="pinsta row bg-light">
+  <!-- section for sight balance -->
+  <div class="col-md-2 empty-section"></div>
+ <!-- section for posts-->
+  <div class="col-md-5 row post-section">
+    <div class="stories">
+
+    </div>
+  </div>
+
+   <!-- section for suggestions -->
+  <div class="col-md-3 row follow-section">
+    <div class="col-md-4 row sidebar"></div>
+    <div class="col-md-9">
+      <div class="account row">
+        <div class="profileimage col-md-3">
+          <img src="{{request.user.photo_path.url}}" alt="profile">
+        </div>
+        <div class="username col-md-6">
+          <h6 class="text-center">{{request.user.username}}</h6>
+          <h6 class="text-center">{{request.user.first_name}} {{request.user.last_name}}</h6>
+        </div>
+        <div class="logout">
+          <h5><a href="{% url 'logout'%}" class="link">switch</a></h5>
+        </div>
+      </div>
+      <div class="suggestions row">
+        <h5 class="col-md-8">
+          Suggestions For You
+        </h5>
+        <p><a href="#">See All</a></p>
+      </div>
+      <footer>
+
+        <p>&copy;2021 <span class="nav-brand">Pinstagram</span></p>
+      </footer>
+    </div>
+  </div>
+</div>
+ <!-- section for sight balance -->
+<div class="col-md-2 empty-section"></div>
+
 
 {%endblock%}

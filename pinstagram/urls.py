@@ -19,7 +19,7 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('django_registration.backends.activation.urls')),
-    path('', include('django.contrib.auth.urls')),
-    path('pinstagram/', include('gallery.urls'))
+    path(r'', include('gallery.urls')),   
+    path(r'accounts/', include('django_registration.backends.activation.urls')),
+    path(r'accounts/', include('django.contrib.auth.urls')),
 ]

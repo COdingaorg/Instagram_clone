@@ -40,8 +40,8 @@ class ImagePost(models.Model):
   image_name = models.CharField(max_length=100)
   image_caption = HTMLField()
   profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
-  likes = models.ForeignKey(PostLikes, on_delete=CASCADE, blank=True)
-  comments = models.ForeignKey(PostComment, on_delete=CASCADE, blank=True)
+  likes = models.ForeignKey(PostLikes, on_delete=CASCADE,null=True, blank=True)
+  comments = models.ForeignKey(PostComment, on_delete=CASCADE,null=True, blank=True)
 
   def save_image(self):
     self.save()

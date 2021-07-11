@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import User
 
 # Create your views here.
 #register user view function
@@ -51,13 +52,17 @@ def profile(request):
 
 @login_required(login_url='login')
 def create_post(request):
-  current_user = request.user
+  current_user_id = request.user.id
   title = 'create Post'
   
   if request.method == 'POST':
     form = AddNewPost(request.POST, request.FILES)
     if form.is_valid():
       new_post = form.save(commit=False)
+
+      #find if a user has a profile, then attach post to it ,
+      # else prompt to create one, then save the details
+      current_user = User.objects.get(pk = current_user_id)
       new_post.profile = current_user
       new_post.save()
 

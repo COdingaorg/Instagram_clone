@@ -36,3 +36,16 @@ def index(request):
   }
   return render(request, 'app_templates/index.html', context)
 
+@login_required(login_url='login')
+def profile(request):
+  '''
+  view function that renders profile template data
+  '''
+  title = f'{request.user.id} profile - Pinstagram'
+
+  context = {
+    'title':title
+  }
+
+  return render(request, 'registration/profile.html', context)
+

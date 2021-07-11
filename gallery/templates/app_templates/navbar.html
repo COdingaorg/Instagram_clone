@@ -61,7 +61,7 @@
           <img src="{{request.user.photo_path.url}}" alt="{{request.user}}'s profile photo">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Saved</a>
           <div class="dropdown-divider"></div>

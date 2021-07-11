@@ -23,7 +23,7 @@
       <hr>
       <span>Username</span><input type="username" name = "username" placeholder="username" />
       <span>Password</span><input type="password" name = "password" placeholder="Password" />
-      <a href="#">Forgot your password?</a>
+      <a href="{% url 'password_reset'%}">Forgot your password?</a>
       <button type="submit">Sign In</button>
       <a href="{% url 'register_user' %}">Create Account</a>
     </form>

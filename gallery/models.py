@@ -20,6 +20,9 @@ class UserProfile(models.Model):
   def save_profile(self):
     self.save()
 
+  def delete_profile(self):
+    self.delete()
+
 class PostLikes(models.Model):
   likes = models.IntegerField(auto_created=True)
   user_liker = models.ForeignKey(User, on_delete=CASCADE)

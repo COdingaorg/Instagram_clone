@@ -1,7 +1,8 @@
+from gallery.models import ImagePost
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import ImagePost
+from tinymce.models import HTMLField
 
 class RegisterNewUser(UserCreationForm):
   class Meta:
@@ -12,4 +13,4 @@ class AddNewPost(forms.ModelForm):
   class Meta:
     model = ImagePost
     exclude = ['profile', 'likes', 'comments']
-    
+    fields = ['image', 'image_name', 'image_caption']

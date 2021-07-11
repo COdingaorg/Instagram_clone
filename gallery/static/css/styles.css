@@ -212,7 +212,6 @@ button.edit_profile{
   display: flex;
   align-items: center;
   justify-content: center;
-
   backdrop-filter: blur(5px);
 }
 .create_post_btn{

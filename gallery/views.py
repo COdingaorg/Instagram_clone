@@ -51,19 +51,21 @@ def profile(request):
 
 @login_required(login_url='login')
 def create_post(request):
+  current_user = request.user
   title = 'create Post'
   
   if request.method == 'POST':
-    form = AddNewPost(request.POST)
+    form = AddNewPost(request.POST, request.FILES)
     if form.is_valid():
-      form.save()
+      new_post = form.save(commit=False)
+      new_post.profile = current_user
+      new_post.save()
+
       return redirect('home')
   else:
     form = AddNewPost
-
-  context = {
-    'form':form,
-    'title':title
-  }
-
-  return render(request, 'app_templates/new_post.html', context)
+    context = {
+      'form':form,
+      'title':title,
+      }
+    return render(request, 'app_templates/new_post.html', context)

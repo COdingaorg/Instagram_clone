@@ -115,3 +115,12 @@ def create_post(request):
       'title':title,
       }
     return render(request, 'app_templates/new_post.html', context)
+
+def search_user(request):
+  title = 'search Results'
+
+  context = {
+    'title':title
+  }
+
+  return render(request, 'app_templates/search_user.html', context)

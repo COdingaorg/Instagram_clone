@@ -45,6 +45,11 @@ nav.navbar{
   border-color: rgb(248,68,76);
   box-shadow: 1px 1px 1px 1px grey;
 }
+a>svg{
+  fill:black;
+  width: 24px;
+  height: 24px;
+}
 /*Styling sidebar, homepage */
 .sidebar{
   height: 80vh;
@@ -253,4 +258,20 @@ button.edit_profile{
   backdrop-filter: blur(5px);
   border: 1px solid white;
   box-shadow: 2px 2px 4px white;
+}
+/*styling results page*/
+.search_results{
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
+  z-index: 5;
+  width: 80vw;
+  height: 80vh;
+  background-color: rgba(255, 255, 255, 0.7);
+ backdrop-filter: blur(3px);
+ border: 1px solid black;
+ display: flex;
+ align-items: flex-start;
+ justify-content: space-around;
+ padding: 20px;
 }

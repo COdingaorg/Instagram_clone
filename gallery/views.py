@@ -41,7 +41,7 @@ def profile(request):
   '''
   view function that renders profile template data
   '''
-  title = f'{request.user.id} profile - Pinstagram'
+  title = f'{request.user.username} profile - Pinstagram'
 
   context = {
     'title':title

@@ -129,3 +129,54 @@ nav.navbar{
 .profileimage>img{
   width: 100%;
 }
+
+/*styling profile page */
+.profile_page{
+  margin-top: 10vh;
+  padding: 0vh 3vw;
+  height: 40vh;
+  
+}
+.profile_pg{ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2vh;
+  width: 160px;
+  height: 160px;
+}
+.profile_pg>img{  
+  border-radius: 50%;
+  border: 1px solid rgb(200, 200, 200);
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+
+}
+.profile_username{
+  font-size: 3em;
+  font-weight: lighter;
+  margin-left:9vw;
+  line-height: 1.6em;
+}
+.user_sam>svg{
+  width: 30px;
+  font-size: 2em;
+}
+button.edit_profile{
+  border: 1px solid rgb(200, 200, 200);
+  line-height: 1.4em;
+  height: 35px;
+  margin: 20px;
+  border-radius: 5px;
+  background-color: rgba(200, 200, 200, 0);
+} 
+.user_sam{
+  margin-top: -20vh;
+  margin-left: -.8vw;
+}
+/*stylign posts in profile page*/
+.new_post{
+  width: 100%;
+  height: auto;
+}

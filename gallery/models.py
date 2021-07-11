@@ -32,3 +32,9 @@ class ImagePost(models.Model):
   profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
   likes = models.ForeignKey(PostLikes, on_delete=CASCADE)
   comments = models.ForeignKey(PostComment, on_delete=CASCADE)
+
+  def save_image(self):
+    self.save()
+
+#imported user instance for testing 
+user_new = User.objects.get(pk = 1)

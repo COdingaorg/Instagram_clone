@@ -1,8 +1,9 @@
+from django.core import exceptions
 from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import User, UserProfile
 
 # Create your views here.
 #register user view function
@@ -62,9 +63,18 @@ def create_post(request):
 
       #find if a user has a profile, then attach post to it ,
       # else prompt to create one, then save the details
-      current_user = User.objects.get(pk = current_user_id)
-      new_post.profile = current_user
-      new_post.save()
+      try:
+        userprofile = UserProfile.objects.get(user = current_user_id)
+      except UserProfile.DoesNotExist:
+        userprofile = 'empty'
+
+      if userprofile == 'empty':
+        info = messages.error(request, 'Your Profile is Empty. Create one to proceed')
+        return redirect('create_profile', {'info':info})
+      
+      else:
+        new_post.profile = userprofile
+        new_post.save()
 
       return redirect('home')
   else:

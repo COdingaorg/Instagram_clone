@@ -4,7 +4,6 @@
 {% load mathfilters %}
 
 {% block content%}
-
 <div class="pinsta row bg-light">
   <!-- section for sight balance -->
   <div class="col-md-2 empty-section">
@@ -21,7 +20,7 @@
     <!--posts-->
     <div class="user-posts card col-md-12 p-0 mt-0">
       <div class="card-header bg-white d-flex flex-row align-items-center">
-        <img src="" alt="profile" class="thumbnail p-0 mr-5 ">
+        <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile" class="thumbnail p-0 mr-5 ">
         <strong class="postusername p-auto">{{request.user.username}}</strong>
         <strong class="p-auto ml-auto ellip"><a href="">&hellip;</a></strong>
       </div>
@@ -92,8 +91,8 @@
     <div class="col-md-2 row sidebar"></div>
     <div class="main col-md-11">
       <div class="account d-flex flex-row align-items-center row">
-        <div class="profileimage col-md-3">
-          <img src="{{request.user.photo_path.url}}" alt="profile">
+        <div class="profileimage">
+          <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile">
         </div>
         <div class="username col-md-6 d-flex flex-column align-items-center justify-content-flex-start p-auto">
           <strong class="text-left">{{request.user.username}}</strong>
@@ -112,7 +111,7 @@
 
       <!--Loop suggestions here-->
       <div class="follow d-flex flex-row mt-4 row">
-        <img src="" alt="profile" class="profileimage ml-auto">
+        <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile" class="profileimage ml-auto">
         <span class="d-flex flex-column ml-auto"><strong>Leomessi</strong>
           <p>popular</p>
         </span>
@@ -157,5 +156,4 @@
   </div>
 </div>
 <!--End of modal window-->
-
 {%endblock%}

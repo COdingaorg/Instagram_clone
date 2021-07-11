@@ -17,9 +17,11 @@
       <p class="alert-info">{{ form.errors }}</p>
       {%csrf_token%}
       <h1>Sign in</h1>
+      <p class="alert-info text-center">
       {% for message in messages%}
-      <p class="alert-info text-center">{{message}}</p>
+      {{message}}
       {%endfor%}
+    </p>
       <hr>
       <span>Username</span><input type="username" name = "username" placeholder="username" />
       <span>Password</span><input type="password" name = "password" placeholder="Password" />

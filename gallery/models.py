@@ -44,7 +44,7 @@ class ImagePost(models.Model):
   comments = models.ForeignKey(PostComment, on_delete=CASCADE,null=True, blank=True)
 
   def save_image(self):
-    self.save()
+    self.save() 
 
   def delete_image(self):
     self.delete()

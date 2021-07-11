@@ -33,7 +33,15 @@ def index(request):
   View function that displays to index template
   '''
   title = 'Pinstagram - Home'
+  current_user_id = request.user.id
+
+  
+  try:
+      user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
+  except UserProfile.DoesNotExist:
+    user_profile = None
   context = {
+    'user_profile':user_profile,
     'title':title
   }
   return render(request, 'app_templates/index.html', context)
@@ -55,8 +63,14 @@ def profile(request):
 
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   else:
+    current_user_id = request.user.id
+    try:
+      user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
+    except UserProfile.DoesNotExist:
+      user_profile = None
     form = UpdateProfile
     context = {
+      'user_profile':user_profile,
       'form':form,
       'title':title,
     }
@@ -87,10 +101,13 @@ def create_post(request):
       
       else:
         new_post.profile = userprofile
-        new_post
         new_post.save()
 
-      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        try:
+          return redirect('home')
+        except:
+          return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+         
   else:
     form = AddNewPost
     context = {

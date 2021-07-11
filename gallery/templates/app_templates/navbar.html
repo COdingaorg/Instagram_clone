@@ -58,7 +58,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img src="{{request.user.photo_path.url}}" alt="{{request.user}}'s profile photo">
+          <img class="nav_img" src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="{{request.user}}'s profile photo">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
@@ -66,9 +66,11 @@
           <a class="dropdown-item" href="#">Saved</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Settings</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
         </div>
       </li>
     </ul>
-    <a href="{% url 'logout'%}"><button type="button" class="btn btn-warning">Logout</button></a>
+    
   </div>
 </nav>

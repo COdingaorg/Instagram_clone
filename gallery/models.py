@@ -50,8 +50,8 @@ class ImagePost(models.Model):
     self.delete()
 
   @classmethod
-  def update_caption(cls, old_caption, new_caption):
-    to_update = cls.objects.filter(image_caption = old_caption)
+  def update_caption(cls, id, new_caption):
+    to_update = cls.objects.filter(pk = id)
     to_update.update(image_caption = new_caption)
 
   def __str__(self):

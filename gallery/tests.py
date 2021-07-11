@@ -40,7 +40,7 @@ class TestImageClass(TestCase):
   def testupdatecaption(self):
     self.new_image.save_image()
     new_caption = 'Live, love, Laugh'
-    ImagePost.update_caption('THis is how we do it', new_caption)
+    ImagePost.update_caption(1, new_caption)
     ImagePost.objects.get(pk=1).refresh_from_db()
 
     self.assertTrue(new_caption == ImagePost.objects.get(image_caption = 'Live, love, Laugh').image_caption)

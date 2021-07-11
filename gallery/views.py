@@ -1,9 +1,9 @@
-from django.core import exceptions
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from .forms import RegisterNewUser,AddNewPost
+from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User, UserProfile
+from .models import UserProfile
 
 # Create your views here.
 #register user view function
@@ -43,13 +43,36 @@ def profile(request):
   '''
   view function that renders profile template data
   '''
-  title = f'{request.user.username} profile - Pinstagram'
+  title = 'profile - Pinstagram'
+  if request.method == 'POST':
+    form = UpdateProfile(request.POST, request.FILES)
+    if form.is_valid():
+      photo = form.cleaned_data['photo']
+      bio = form.cleaned_data['bio']
+      user_id = request.user.id
+      new_profile = UserProfile(photo_path = photo, bio = bio, user_id = user_id)
+      new_profile.save_profile()
 
-  context = {
-    'title':title
-  }
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+  else:
+    form = UpdateProfile
+    context = {
+      'form':form,
+      'title':title,
+    }
+  
+    return render(request, 'registration/profile.html', context)
 
-  return render(request, 'registration/profile.html', context)
+
+
+
+
+
+
+
+
+
+
 
 @login_required(login_url='login')
 def create_post(request):
@@ -71,13 +94,13 @@ def create_post(request):
       if userprofile == 'empty':
         path = request.path
         info = messages.error(request, 'Your Profile is Empty. Create one to proceed')
-        return redirect('update_profile', {'info':info, 'path':path})
+        return redirect('profile', {'info':info, 'path':path})
       
       else:
         new_post.profile = userprofile
         new_post.save()
 
-      return redirect('home')
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   else:
     form = AddNewPost
     context = {
@@ -85,15 +108,3 @@ def create_post(request):
       'title':title,
       }
     return render(request, 'app_templates/new_post.html', context)
-
-@login_required(login_url='login')
-def update_profile(request):
-  title = 'Update Profile'
-  form = ''
-
-  context = {
-    'title':title,
-    'form' : form,
-  }
-
-  return render(request, 'app_templates/update_profile.html')

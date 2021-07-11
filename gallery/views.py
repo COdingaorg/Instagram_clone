@@ -69,8 +69,9 @@ def create_post(request):
         userprofile = 'empty'
 
       if userprofile == 'empty':
+        path = request.path
         info = messages.error(request, 'Your Profile is Empty. Create one to proceed')
-        return redirect('create_profile', {'info':info})
+        return redirect('update_profile', {'info':info, 'path':path})
       
       else:
         new_post.profile = userprofile
@@ -84,3 +85,15 @@ def create_post(request):
       'title':title,
       }
     return render(request, 'app_templates/new_post.html', context)
+
+@login_required(login_url='login')
+def update_profile(request):
+  title = 'Update Profile'
+  form = ''
+
+  context = {
+    'title':title,
+    'form' : form,
+  }
+
+  return render(request, 'app_templates/update_profile.html')

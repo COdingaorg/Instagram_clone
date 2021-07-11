@@ -36,5 +36,8 @@ class ImagePost(models.Model):
   def save_image(self):
     self.save()
 
+  def delete_image(self):
+    self.delete()
+
 #imported user instance for testing 
 user_new = User.objects.get(pk = 1)

@@ -17,6 +17,9 @@ class UserProfile(models.Model):
   follows = models.ForeignKey(FollowChain, on_delete=CASCADE, null=True)
   followers = models.ForeignKey(Follower, on_delete=CASCADE, null=True)
 
+  def save_profile(self):
+    self.save()
+
 class PostLikes(models.Model):
   likes = models.IntegerField(auto_created=True)
   user_liker = models.ForeignKey(User, on_delete=CASCADE)

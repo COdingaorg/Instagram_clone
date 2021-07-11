@@ -1,9 +1,11 @@
 from django.test import TestCase
 from .models import ImagePost, UserProfile, PostLikes, PostComment, user_new
-from django.contrib.auth.models import User
 
 # Create your tests here.
 class TestImageClass(TestCase):
+  '''
+  Testing save, caption update and delete methods of Image post class
+  '''
   def setUp(self):
     #create instance
     self.new_comment = PostComment(1,'Nice',1)
@@ -42,3 +44,33 @@ class TestImageClass(TestCase):
     ImagePost.objects.get(pk=1).refresh_from_db()
 
     self.assertTrue(new_caption == ImagePost.objects.get(image_caption = 'Live, love, Laugh').image_caption)
+
+
+class TestProfileClass(TestCase):
+  '''
+  Testing save, udate and delete methods of UserProfile class
+  '''
+  #setup method
+  def setUp(self):
+    self.new_comment = PostComment(1,'Nice',1)
+    self.new_comment.save()
+    
+    self.new_like = PostLikes(1,1,1)
+    self.new_like.save()
+    
+    new_user = user_new
+    new_user.save()
+    
+    self.new_profile = UserProfile(1,'img.png','this is bio',1)
+    self.new_profile.save()
+
+  #test instance creation
+  def testinstance(self):
+    self.assertTrue(isinstance(self.new_profile, UserProfile))
+
+  def testsaveprofile(self):
+    self.new_profile.save_profile()
+    profiles = UserProfile.objects.all()
+
+    self.assertEqual(len(profiles), 1)
+  

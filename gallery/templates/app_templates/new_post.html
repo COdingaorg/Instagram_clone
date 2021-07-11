@@ -13,15 +13,28 @@
   {%else%}
   <title>Create New Post</title>
   {%endif%}
+  {% block styles%}
+  {%bootstrap_css%}
   <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+
+  {%endblock%}
 </head>
 
 <body>
 
   <div class="create_post">
-    <div class="modal_bg">
-      <form action="{% url 'create_post'%}">
-        
+    <div class="modal_bg p-3">
+      
+      <form action="{% url 'create_post'%}" method="POST" class="create_post_form p-3">
+        <h3 class="text-center">Share Your Post</h3>
+        {%csrf_token%}
+        <p class="p-3"><span>{{form.post_image.label}} : </span>{{form.post_image}}</p>
+        <hr>
+        <p><span>{{form.post_title.label}} </span>{{form.post_title}}</p>
+        <hr>
+        <p><span>{{form.caption.label}}</span>{{form.caption}}</p>
+
+        <button type="submit" class='create_post_btn'>Post</button>
       </form>
     </div>
   </div>

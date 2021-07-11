@@ -212,5 +212,28 @@ button.edit_profile{
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
+  backdrop-filter: blur(5px);
+}
+.create_post_btn{
+  background-image:linear-gradient(rgb(248,68,76), rgb(248,75,107));
+  color: white;
+  border: 1px solid white;
+  box-shadow: 1px 1px 2px 1px white;
+  width: 6vw;
+  height: 4vh;
+}
+.create_post_btn:hover{
+  background-image:linear-gradient( rgb(248,75,107),rgb(248,68,76));
+  width: 6.8vw;
+  height: 5vh;
+  font-size: 1.2em;
+}
+.create_post_form{
+  z-index: 4;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  border: 1px solid white;
+  box-shadow: 2px 2px 4px white;
+}

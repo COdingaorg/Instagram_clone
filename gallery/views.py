@@ -63,17 +63,6 @@ def profile(request):
   
     return render(request, 'registration/profile.html', context)
 
-
-
-
-
-
-
-
-
-
-
-
 @login_required(login_url='login')
 def create_post(request):
   current_user_id = request.user.id
@@ -98,6 +87,7 @@ def create_post(request):
       
       else:
         new_post.profile = userprofile
+        new_post
         new_post.save()
 
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

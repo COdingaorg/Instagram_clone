@@ -14,8 +14,8 @@ class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'gallery/')
   bio = models.CharField(max_length=200)
   user = models.ForeignKey(User, on_delete=CASCADE)
-  follows = models.ForeignKey(FollowChain, on_delete=CASCADE, null=True)
-  followers = models.ForeignKey(Follower, on_delete=CASCADE, null=True)
+  follows = models.ForeignKey(FollowChain, on_delete=CASCADE,null=True, blank=True)
+  followers = models.ForeignKey(Follower, on_delete=CASCADE,null=True, blank=True)
 
   def save_profile(self):
     self.save()
@@ -40,8 +40,8 @@ class ImagePost(models.Model):
   image_name = models.CharField(max_length=100)
   image_caption = HTMLField()
   profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
-  likes = models.ForeignKey(PostLikes, on_delete=CASCADE)
-  comments = models.ForeignKey(PostComment, on_delete=CASCADE)
+  likes = models.ForeignKey(PostLikes, on_delete=CASCADE, blank=True)
+  comments = models.ForeignKey(PostComment, on_delete=CASCADE, blank=True)
 
   def save_image(self):
     self.save()

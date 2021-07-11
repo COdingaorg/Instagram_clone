@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile
+from .models import UserProfile, User
 
 # Create your views here.
 #register user view function
@@ -119,8 +119,17 @@ def create_post(request):
 def search_user(request):
   title = 'search Results'
 
-  context = {
-    'title':title
-  }
+  if 'search_term' in request.GET and request.GET['search_term']:
+    search_term = request.GET.get('search_term')
 
-  return render(request, 'app_templates/search_user.html', context)
+    users = User.objects.filter(username = search_term)
+    context = {
+      'users':users,
+      'title':title,
+
+    }
+
+    return render(request, 'app_templates/search_user.html', context)
+  else:
+    message = 'No users Found'
+    return render(request, 'app_templates/search_user.html', {'messeage':message})

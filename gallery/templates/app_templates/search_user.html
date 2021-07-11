@@ -1,3 +1,18 @@
 {% include 'app_templates/index.html'%}
 
-<div class="search_results">Search Results</div>
+<h3 class="search_results">Search Results</h3>
+{%if users%}
+{% for user in users%}
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{user.username}}</h5>
+    <p class="card-text">{{user.first_name}} _ {{user.last_name}}</p>
+    <a href="#" class="btn btn-primary">Follow</a>
+  </div>
+</div>
+
+{%endfor%}
+{%else%}
+<h1>No Users Found</h1>
+{%endif%}

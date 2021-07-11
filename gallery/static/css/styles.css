@@ -195,3 +195,22 @@ button.edit_profile{
   width: 100%;
   height: auto;
 }
+
+/*styling posts form */
+.modal_sample{
+  margin-top: 10vh;
+}
+.create_post{
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../images/new_post.jpg');
+}
+.modal_bg{
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

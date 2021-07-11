@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from .forms import RegisterNewUser
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .forms import AddNewPost
 
 # Create your views here.
 #register user view function
@@ -49,3 +50,14 @@ def profile(request):
 
   return render(request, 'registration/profile.html', context)
 
+@login_required(login_url='login')
+def create_post(request):
+  title = 'create Post'
+  form = AddNewPost
+
+  context = {
+    'form':form,
+    'title':title
+  }
+
+  return render(request, 'app_templates/new_post.html', context)

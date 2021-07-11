@@ -39,5 +39,13 @@ class ImagePost(models.Model):
   def delete_image(self):
     self.delete()
 
+  @classmethod
+  def update_caption(cls, old_caption, new_caption):
+    to_update = cls.objects.filter(image_caption = old_caption)
+    to_update.update(image_caption = new_caption)
+
+  def __str__(self):
+      return self 
+
 #imported user instance for testing 
 user_new = User.objects.get(pk = 1)

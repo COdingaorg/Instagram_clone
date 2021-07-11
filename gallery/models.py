@@ -1,19 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.base import Model
-from django.db.models.deletion import CASCADE, SET_NULL
+from django.db.models.deletion import CASCADE, RESTRICT, SET_DEFAULT, SET_NULL
 
 # Create your models here.
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'gallery/')
   bio = models.CharField(max_length=200)
   user = models.ForeignKey(User, on_delete=CASCADE)
-
-class ImagePost(models.Model):
-  image = models.ImageField(upload_to = 'posts/')
-  image_name = models.CharField(max_length=100)
-  image_caption = models.TextField(max_length=250)
-  profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
 
 class PostLikes(models.Model):
   likes = models.IntegerField(auto_created=True)
@@ -22,5 +16,14 @@ class PostLikes(models.Model):
 class PostComment(models.Model):
   comments = models.CharField(max_length = 260)
   user_commenter = models.ForeignKey(User, on_delete=CASCADE)
+
+class ImagePost(models.Model):
+  image = models.ImageField(upload_to = 'posts/')
+  image_name = models.CharField(max_length=100)
+  image_caption = models.TextField(max_length=250)
+  profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
+  likes = models.ForeignKey(PostLikes, on_delete=CASCADE)
+  comments = models.ForeignKey(PostComment, on_delete=CASCADE)
+
 
 

@@ -23,6 +23,10 @@ class UserProfile(models.Model):
   def delete_profile(self):
     self.delete()
 
+  @classmethod
+  def update_bio(cls, id, new_bio):
+    to_update = cls.objects.filter(pk = id).update(bio = new_bio)
+
 class PostLikes(models.Model):
   likes = models.IntegerField(auto_created=True)
   user_liker = models.ForeignKey(User, on_delete=CASCADE)

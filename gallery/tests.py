@@ -79,4 +79,12 @@ class TestProfileClass(TestCase):
     self.new_profile.delete_profile()
 
     self.assertTrue(len(UserProfile.objects.all())==0)
+
+  def testupdatebio(self):
+    self.new_profile.save_profile()
+    new_bio = 'Software developer'
+    UserProfile.update_bio(1, new_bio)
+    
+    UserProfile.objects.get(pk=1).refresh_from_db()
+    self.assertTrue(UserProfile.objects.get(bio = 'Software developer').bio == 'Software developer')
   

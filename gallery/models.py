@@ -25,5 +25,11 @@ class ImagePost(models.Model):
   likes = models.ForeignKey(PostLikes, on_delete=CASCADE)
   comments = models.ForeignKey(PostComment, on_delete=CASCADE)
 
+class FollowChain(models.Model):
+  follow = models.ForeignKey(User, on_delete=CASCADE)
+
+class Follower(models.Model):
+  followers = models.ForeignKey(User, on_delete=CASCADE)
+
 
 

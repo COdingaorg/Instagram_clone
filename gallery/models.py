@@ -47,6 +47,8 @@ class ImagePost(models.Model):
   profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
   likes = models.ForeignKey(PostLikes, on_delete=CASCADE,null=True, blank=True)
   comments = models.ForeignKey(PostComment, on_delete=CASCADE,null=True, blank=True)
+  class Meta:
+    ordering = ['-id']
 
   def save_image(self):
     self.save() 

@@ -58,10 +58,12 @@ def index(request):
   }
   return render(request, 'app_templates/index.html', context)
 
+#view function rendering to profile template
 @login_required(login_url='login')
 def profile(request):
   '''
   view function that renders profile template data
+  displays current user profile data
   '''
   title = 'profile - Pinstagram'
   if request.method == 'POST':

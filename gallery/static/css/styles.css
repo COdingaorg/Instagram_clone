@@ -45,10 +45,24 @@ nav.navbar{
   border-color: rgb(248,68,76);
   box-shadow: 1px 1px 1px 1px grey;
 }
-a>svg{
+button>svg{
   fill:black;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+}
+.form-inline>button{
+  border-radius: 50px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  border: 0px solid;
+}
+.form-inline>input.form-control{
+  width: 120px;
+  height: 30px;
 }
 /*Styling sidebar, homepage */
 .sidebar{
@@ -268,10 +282,14 @@ button.edit_profile{
   width: 80vw;
   height: 80vh;
   background-color: rgba(255, 255, 255, 0.7);
- backdrop-filter: blur(3px);
+ backdrop-filter: blur(5px);
  border: 1px solid black;
  display: flex;
  align-items: flex-start;
  justify-content: space-around;
  padding: 20px;
+ 
+}
+.card{
+  border: 1px solid white;
 }

@@ -122,8 +122,9 @@ def search_user(request):
   if 'search_term' in request.GET and request.GET['search_term']:
     search_term = request.GET.get('search_term')
 
-    users = User.objects.filter(username = search_term)
+    users = User.objects.filter(username__icontains = search_term)
     context = {
+      'search_term':search_term,
       'users':users,
       'title':title,
 

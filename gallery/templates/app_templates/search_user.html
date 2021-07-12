@@ -1,18 +1,25 @@
 {% include 'app_templates/index.html'%}
 
-<h3 class="search_results">Search Results</h3>
-{%if users%}
-{% for user in users%}
+<div class="search_results row">
 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{user.username}}</h5>
-    <p class="card-text">{{user.first_name}} _ {{user.last_name}}</p>
-    <a href="#" class="btn btn-primary">Follow</a>
+  <h3 class="text-center col-md-10">Search Results:</h3>
+  <a href="{% url 'home'%}"class='col-md-1'>
+    <button class="btn btn-warning ">close</button>
+  </a>
+
+  {%if users%}
+  {% for user in users%}
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">@{{user.username}}</h5>
+      <p class="card-text">{{user.first_name}} _ {{user.last_name}}</p>
+      <a href="#" class="btn btn-primary">Follow</a>
+    </div>
   </div>
-</div>
 
-{%endfor%}
-{%else%}
-<h1>No Users Found</h1>
-{%endif%}
+  {%endfor%}
+  {%else%}
+  <h4>No Users with username {{search_term}} Found</h4>
+  {%endif%}
+</div>

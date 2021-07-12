@@ -171,16 +171,19 @@ def search_user(request):
     return render(request, 'app_templates/search_user.html', {'messeage':message})
 
 #adds comment to posts
-def add_comment(request, post_id):
+def add_comment(request):
   title = 'Add comment'
-  redirect_to = request.REQUEST.get('next','')
   if request.method == 'POST':
     comment = request.POST.get('comment')
+    post_id = request.POST.get('post_id')
+    user = User.objects.get(id = request.user.id)
+    post = ImagePost.objects.get(id = post_id)
     date_created = dt.datetime.now()
 
-    new_comment = PostComment(comments = comment, date_created = date_created)
+    new_comment = PostComment(comments = comment, date_created = date_created, user_commenter = user, post = post )
     new_comment.save()
 
-    return HttpResponseRedirect(redirect_to)
+    return render(request, 'app_templates/index.html')
+
   else:
     return render(request, 'app_templates/index.html', locals())

@@ -159,6 +159,34 @@ button>svg{
   position: fixed;
   right: 20%;
 }
+.follow_container{
+  height: 50vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.follow_container::-webkit-scrollbar{
+  display: none;
+}
+.follow_container::-webkit-scrollbar-button{
+  display: inline;
+}
+.follow{
+  height: 8vh;
+  width: 100%;
+  margin-top: -2px;
+}
+.suggestion_footer{
+  height: 15vh;
+  overflow-x: scroll;  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .account{
   height: 10vh;
   overflow: visible;

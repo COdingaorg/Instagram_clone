@@ -120,16 +120,20 @@
       </div>
 
       <!--Loop suggestions here-->
+      <div class="follow_container">
+      {% for suggestion in suggestions%}
       <div class="follow d-flex flex-row mt-4 row">
-        <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile"
+        <img src="{{suggestion.photo_path.url}}" alt="{{suggestion.user.username}}"
           class="profileimage ml-auto">
-        <span class="d-flex flex-column ml-auto"><strong>Leomessi</strong>
+        <span class="d-flex flex-column ml-auto"><strong>{{suggestion.user.username}}</strong>
           <p>popular</p>
         </span>
         <a class="ml-auto mr-3" href=""><strong>Follow</strong></a>
       </div>
+      {%endfor%}
+    </div>
       <!--end of loop-->
-      <footer>
+      <footer class="suggestion_footer">
 
         <p>&copy;2021 <span class="nav-brand">Pinstagram</span></p>
       </footer>

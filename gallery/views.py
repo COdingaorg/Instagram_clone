@@ -31,6 +31,9 @@ def register_user(request):
 def index(request):
   '''
   View function that displays to index template
+  displays posts
+  displays user profile details
+  renders suggestions
   '''
   title = 'Pinstagram - Home'
   current_user_id = request.user.id
@@ -49,8 +52,16 @@ def index(request):
     all_posts = None
     message = 'Try failed'
 
+  try:
+    suggestions = UserProfile.objects.all()[1:9]
+    message = 'success'
+  except ImagePost.DoesNotExist:
+    suggestions = None
+    message = 'Try failed'
+
   
   context = {
+    'suggestions':suggestions,
     'all_posts':all_posts,
     'user_profile':user_profile,
     'title':title,

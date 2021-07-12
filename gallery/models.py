@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from tinymce.models import HTMLField
-from django.utils.timezone import now
 import datetime as dt
 
 # Create your models here.
@@ -33,28 +32,12 @@ class UserProfile(models.Model):
     to_update = cls.objects.filter(pk = id).update(bio = new_bio)
     return to_update
 
-class PostLikes(models.Model):
-  likes = models.IntegerField(auto_created=True)
-  user_liker = models.ForeignKey(User, on_delete=CASCADE)
-  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
-  class Meta:
-    ordering = ['-id']
-
-class PostComment(models.Model):
-  comments = models.CharField(max_length = 260)
-  user_commenter = models.ForeignKey(User, on_delete=CASCADE)
-  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
-  class Meta:
-    ordering = ['-id']
-
 class ImagePost(models.Model):
   image = models.ImageField(upload_to = 'posts/')
   image_name = models.CharField(max_length=100)
   image_caption = HTMLField()
   date_created = models.DateTimeField(editable=False, blank=True)
   profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
-  likes = models.ForeignKey(PostLikes, on_delete=CASCADE,null=True, blank=True)
-  comments = models.ForeignKey(PostComment, on_delete=CASCADE,null=True, blank=True)
   class Meta:
     ordering = ['-id']
 
@@ -74,3 +57,19 @@ class ImagePost(models.Model):
 
 #imported user instance for testing 
 user_new = User.objects.get(pk = 1)
+
+class PostLikes(models.Model):
+  likes = models.IntegerField(auto_created=True)
+  user_liker = models.ForeignKey(User, on_delete=CASCADE)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
+  post = models.ForeignKey(ImagePost, on_delete=CASCADE,null=True, blank=True)
+  class Meta:
+    ordering = ['-id']
+
+class PostComment(models.Model):
+  comments = models.CharField(max_length = 260)
+  user_commenter = models.ForeignKey(User, on_delete=CASCADE)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
+  post = models.ForeignKey(ImagePost, on_delete=CASCADE,null=True, blank=True)
+  class Meta:
+    ordering = ['-id']

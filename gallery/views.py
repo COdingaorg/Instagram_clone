@@ -188,7 +188,6 @@ def search_user(request):
 
 #adds comment to posts
 def add_comment(request):
-  title = 'Add comment'
   if request.method == 'POST':
     comment = request.POST.get('comment')
     post_id = request.POST.get('post_id')
@@ -199,10 +198,10 @@ def add_comment(request):
     new_comment = PostComment(comments = comment, date_created = date_created, user_commenter = user, post = post )
     new_comment.save()
 
-    return render(request, 'app_templates/index.html')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
   else:
-    return render(request, 'app_templates/index.html', locals())
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 #adds like function    
 def add_like(request):
@@ -223,11 +222,11 @@ def add_like(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 #view function opening an image
-def open_post(request):
+def open_post(request, sentid):
   '''
   view function rendering to image page
   '''
-  postid = 5
+  postid = sentid
   title = f'{request.user.username}\'s post'
 
   try:

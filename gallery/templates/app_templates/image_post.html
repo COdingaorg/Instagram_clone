@@ -19,8 +19,8 @@
           <!--card head-->
           <div class="card-header bg-white d-flex flex-row align-items-center justify-content-center">
             <img src="{{post.profile.photo_path.url}}" alt="{{post.profile.user.username}}" class="thumbnail p-0">
-            <strong class="postusername">{{post.profile.user.username}}</strong>
-            <strong class="p-auto ml-auto ellip"><a href="">&hellip;</a></strong>
+            <p class="postusername mt-4">{{post.profile.user.username}}</p>
+            <p class="p-auto ellip ml-auto"><a href="">&hellip;</a></p>
           </div>
           <!--Display comments-->
           <div class="card-footer columns_disp d-flex flex-column bg-white">
@@ -37,7 +37,7 @@
               <a href="" class="pr-2 bold">
                 {{comment.user_commenter.username}}:
               </a>
-              {{comment.comments}}
+              {{comment.comments}}<br>
               {%endfor%}
               {%else%}
               <span></span>

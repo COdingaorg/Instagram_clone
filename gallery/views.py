@@ -169,3 +169,13 @@ def search_user(request):
   else:
     message = 'No users Found'
     return render(request, 'app_templates/search_user.html', {'messeage':message})
+
+#adds comment to posts
+def add_comment(request):
+  title = 'Add comment'
+  if request.method == 'POST':
+    pass
+  context = {
+    'title':title
+  }
+  return render(request, 'app_templates/index.html', context)

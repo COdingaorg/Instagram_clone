@@ -8,9 +8,11 @@ import datetime as dt
 # Create your models here.
 class FollowChain(models.Model):
   follow = models.ForeignKey(User, on_delete=CASCADE)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
 
 class Follower(models.Model):
   followers = models.ForeignKey(User, on_delete=CASCADE)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
 
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'gallery/')
@@ -18,6 +20,7 @@ class UserProfile(models.Model):
   user = models.ForeignKey(User, on_delete=CASCADE)
   follows = models.ForeignKey(FollowChain, on_delete=CASCADE,null=True, blank=True)
   followers = models.ForeignKey(Follower, on_delete=CASCADE,null=True, blank=True)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
 
   def save_profile(self):
     self.save()
@@ -33,12 +36,14 @@ class UserProfile(models.Model):
 class PostLikes(models.Model):
   likes = models.IntegerField(auto_created=True)
   user_liker = models.ForeignKey(User, on_delete=CASCADE)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
   class Meta:
     ordering = ['-id']
 
 class PostComment(models.Model):
   comments = models.CharField(max_length = 260)
   user_commenter = models.ForeignKey(User, on_delete=CASCADE)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
   class Meta:
     ordering = ['-id']
 

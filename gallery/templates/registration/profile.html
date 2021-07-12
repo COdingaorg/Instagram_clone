@@ -5,9 +5,6 @@
 
 {% block content%}
 <div class="profile_page row bg-light mt-100 d-flex justify-content-center align-items-center">
-
-
-
   <div class="col-md-2 bg-light"></div>
   <div class="col-md-8">
     <div class=" profile_pg">
@@ -17,7 +14,9 @@
       {% for message in messages%}
       <div class="alert_window alert alert-warning alert-dismissible fade show z-index-4 position-fixed">
         <strong>Warning!</strong>--<p>{{message}}</p>
-        <button type="button" data-dismiss="alert" class="bg-primary w-25 h-30 text-center" ><p class="w-100 h-100" data-toggle="modal" data-target="#exampleModalLong">create</p></button>
+        <button type="button" data-dismiss="alert" class="bg-primary w-25 h-30 text-center">
+          <p class="w-100 h-100" data-toggle="modal" data-target="#exampleModalLong">create</p>
+        </button>
       </div>
       {%endfor%}
       <div class="user_sam d-flex flex-row align-items-center justify-content-start">
@@ -45,27 +44,39 @@
     </div>
     <hr>
     <!--Loop posts here-->
-    <!--if not posts-->
-    <div class="posts_loop bg-light">
-      <p class="text-center alert-info">No posts yet!</p>
-      <div class="get_started">
-        <div class="card col-md-4">
-          <h3 class="card-title text-center">Get Started</h3>
-          <div class="card-body">
-            <img class="card-image new_post" src="../../static/images/new_post.jpg" alt="">
-            <p class="text-center">Share your style, moment, opinion, video, skill, art... anything really</p>
-          </div>
-          <div class="card-footer d-flex align-items-center justify-content-center">
-            <a href="{% url 'create_post' %}"><button type="button" id='add_post_btn'
-                class="p-auto text-center btn btn-primary">Add Post</button></a>
+    {% if posts %}
+    <div class="a_user_post col-md-12">
+      {% for post in user_posts%}
+      <div class="col-md-3">
+        <img src="{{post.image.url}}" alt="{{post.image_name}}">
+        <p class="alert-warning">
+          {{post.image_name}}
+        </p>
+      </div>
+      {%endfor%}
+      {%else%}
+      <!--if not posts-->
+      <div class="posts_loop bg-light">
+        <p class="text-center alert-info">No posts yet!</p>
+        <div class="get_started">
+          <div class="card col-md-4">
+            <h3 class="card-title text-center">Get Started</h3>
+            <div class="card-body">
+              <img class="card-image new_post" src="../../static/images/new_post.jpg" alt="">
+              <p class="text-center">Share your style, moment, opinion, video, skill, art... anything really</p>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-center">
+              <a href="{% url 'create_post' %}"><button type="button" id='add_post_btn'
+                  class="p-auto text-center btn btn-primary">Add Post</button></a>
+            </div>
           </div>
         </div>
       </div>
-
-
+      {%endif%}
     </div>
+    <div class="col-md-2 bg-light"></div>
+
   </div>
-  <div class="col-md-2 bg-light"></div>
 </div>
 
 <!--Modal Window-->

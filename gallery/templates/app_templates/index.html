@@ -79,15 +79,18 @@
           <p class="bold">{{post.profile.user.username}}</p>
           <p class="pl-2">{{post.image_caption}}</p>
         </span>
-        <span>View all<a href=""> {% if post.comments.count %}{{post.comments.count}}{%else%} <span>No</span>{%endif%}
+        <span>View all<a href=""> {% if likes %}{{likes.count}}{%else%} <span>No</span>{%endif%}
             comments</a></span>
         <span class="d-flex flex-row"><a href=""
-            class="pr-2 bold">{% if post.comments.count %}{{post.comments.user_commenter.username}}{%else%}
+            class="pr-2 bold">{% if comments %}{{comments.count}}{%else%}
             <span></span>{%endif%}</a>
-          {% if post.comments.count %}{{post.comments.comments}}{%else%}<p>No Comment</p>{%endif%}
+          {% if comments %}
+          {{top_comment.user_commenter.username}}--{{top_comment.comments|truncatechars:20}}
+          {%else%}<p>No Comment</p>{%endif%}
         </span>
         <i>{{post.date_created|timesince}} ago</i>
       </div>
+      <!--Adding comment-->
       <div class="card-footer bg-white">
         <form action="{% url 'add_comment'%}" class="d-flex flex-row mt-3 mb-3 emoji" method="POST">
           {%csrf_token%}

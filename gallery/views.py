@@ -53,6 +53,7 @@ def index(request):
     all_posts = None
     message = 'Try failed'
 
+  #returning number of user profile
   try:
     suggestions = UserProfile.objects.all()[1:9]
     message = 'success'
@@ -60,8 +61,27 @@ def index(request):
     suggestions = None
     message = 'Try failed'
 
+  #returning number of likes and comments
+  post_id = 5
+  try:
+    likes = PostLikes.objects.filter(post=post_id)
+  except PostLikes.DoesNotExist:
+    likes = None
+  #eturning comments count
+  try:
+    comments = PostComment.objects.filter(post=post_id)
+    top_comment = comments.first()
+  except PostComment.DoesNotExist:
+    comments = None
+
+  
+
+  
   
   context = {
+    'top_comment':top_comment,
+    'likes':likes,
+    'comments':comments,
     'suggestions':suggestions,
     'all_posts':all_posts,
     'user_profile':user_profile,

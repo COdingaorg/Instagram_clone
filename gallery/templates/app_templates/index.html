@@ -29,7 +29,7 @@
         <strong class="p-auto ml-auto ellip"><a href="">&hellip;</a></strong>
       </div>
       <div class="card-image">
-        <img src="{{post.image.url}}" alt="{{post.image_name}}">
+        <a href="{% url 'open_post' post.id %}"><img src="{{post.image.url}}" alt="{{post.image_name}}"></a>
       </div>
 
       <div class="card-footer bg-white">
@@ -75,20 +75,23 @@
           </p>
         </div>
       </div>
+      <!--displaying likes and comments-->
       <div class="card-footer d-flex flex-column bg-white">
-        <strong>{% if post.likes.count %}{{post.likes.count}}{%else%} <span class="m-1">0</span>{%endif%}likes</strong>
+        <strong>{% if likes %}{{likes.count}}{%else%} <span class="m-1">0</span>{%endif%}likes</strong>
         <span class="d-flex flex-row">
           <p class="bold">{{post.profile.user.username}}</p>
           <p class="pl-2">{{post.image_caption}}</p>
         </span>
-        <span>View all<a href=""> {% if likes %}{{likes.count}}{%else%} <span>No</span>{%endif%}
+        <span>View all<a href="{% url 'open_post' post.id %}"> {% if comments %}{{comments.count}}{%else%} <span>No</span>{%endif%}
             comments</a></span>
-        <span class="d-flex flex-row"><a href=""
-            class="pr-2 bold">{% if comments %}{{comments.count}}{%else%}
-            <span></span>{%endif%}</a>
-          {% if comments %}
-          {{top_comment.user_commenter.username}}--{{top_comment.comments|truncatechars:20}}
-          {%else%}<p>No Comment</p>{%endif%}
+        <span class="d-flex flex-row">
+          <a href="" class="pr-2 bold">
+          {% if top_comment %}
+          {{top_comment.user_commenter.username}}</a>--{{top_comment.comments|truncatechars:20}}
+          {%else%}
+          <span></span><p>No Comment</p>
+          {%endif%}
+          
         </span>
         <i>{{post.date_created|timesince}} ago</i>
       </div>

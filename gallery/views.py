@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import ImagePost, PostComment, UserProfile, User
+from .models import ImagePost, PostComment, PostLikes, UserProfile, User
 import datetime as dt
 
 # Create your views here.
@@ -187,3 +187,21 @@ def add_comment(request):
 
   else:
     return render(request, 'app_templates/index.html', locals())
+
+#adds like function    
+def add_like(request):
+  '''
+  view function that collect like form values and creates a like
+  '''
+  if request.method == 'POST':
+    imagepost = ImagePost.objects.get(id = request.POST.get('post_like'))
+    date_created = dt.datetime.now()
+    user_like = User.objects.get(id = request.user.id)
+    
+    new_like = PostLikes(user_liker = user_like, date_created = date_created, post = imagepost)
+    new_like.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+  else:
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

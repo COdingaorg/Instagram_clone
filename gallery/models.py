@@ -59,7 +59,6 @@ class ImagePost(models.Model):
 user_new = User.objects.get(pk = 1)
 
 class PostLikes(models.Model):
-  likes = models.IntegerField(auto_created=True)
   user_liker = models.ForeignKey(User, on_delete=CASCADE)
   date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
   post = models.ForeignKey(ImagePost, on_delete=CASCADE,null=True, blank=True)

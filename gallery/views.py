@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import ImagePost, UserProfile, User
+from .models import ImagePost, PostComment, UserProfile, User
 import datetime as dt
 
 # Create your views here.
@@ -171,11 +171,16 @@ def search_user(request):
     return render(request, 'app_templates/search_user.html', {'messeage':message})
 
 #adds comment to posts
-def add_comment(request):
+def add_comment(request, post_id):
   title = 'Add comment'
+  redirect_to = request.REQUEST.get('next','')
   if request.method == 'POST':
-    pass
-  context = {
-    'title':title
-  }
-  return render(request, 'app_templates/index.html', context)
+    comment = request.POST.get('comment')
+    date_created = dt.datetime.now()
+
+    new_comment = PostComment(comments = comment, date_created = date_created)
+    new_comment.save()
+
+    return HttpResponseRedirect(redirect_to)
+  else:
+    return render(request, 'app_templates/index.html', locals())

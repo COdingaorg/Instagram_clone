@@ -80,7 +80,7 @@
         <i>{{post.date_created|timesince}} ago</i>
       </div>
       <div class="card-footer bg-white">
-        <form action="{% url 'add_comment'%}" class="d-flex flex-row mt-3 mb-3 emoji" method="POST">
+        <form action="{% url 'add_comment' post.id%}" class="d-flex flex-row mt-3 mb-3 emoji" method="POST">
           {%csrf_token%}
           <img src="../../static/images/smile.png" alt="smiley" width="30px" height="30px" class="mr-1">
           <input type="text" name="comment" placeholder="Add a comment..." class="col-md-10">

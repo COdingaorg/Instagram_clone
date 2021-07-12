@@ -74,10 +74,6 @@ def index(request):
   except PostComment.DoesNotExist:
     comments = None
 
-  
-
-  
-  
   context = {
     'top_comment':top_comment,
     'likes':likes,
@@ -225,3 +221,48 @@ def add_like(request):
 
   else:
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+#view function opening an image
+def open_post(request):
+  '''
+  view function rendering to image page
+  '''
+  postid = 5
+  title = f'{request.user.username}\'s post'
+
+  try:
+    user_profile = UserProfile.objects.filter(user = request.user.id).order_by('id').first()
+  except UserProfile.DoesNotExist:
+    user_profile = None
+
+  #collecting the post
+  try:
+    post = ImagePost.objects.get(id = postid)
+    message = 'success'
+  except ImagePost.DoesNotExist:
+    post= None
+    message = 'Try failed'
+
+  #returning number of likes and comments
+  try:
+    likes = PostLikes.objects.filter(post=postid)
+  except PostLikes.DoesNotExist:
+    likes = None
+    
+  #eturning comments count
+  try:
+    comments = PostComment.objects.filter(post=postid)
+    top_comment = comments.first()
+  except PostComment.DoesNotExist:
+    comments = None
+
+  context = {
+    'top_comment':top_comment,
+    'likes':likes,
+    'comments':comments,
+    'post':post,
+    'user_profile':user_profile,
+    'title':title,
+    'message':message}
+
+  return render(request, 'app_templates/image_post.html', context)

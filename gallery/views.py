@@ -4,6 +4,7 @@ from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import ImagePost, UserProfile, User
+import datetime as dt
 
 # Create your views here.
 #register user view function
@@ -134,6 +135,7 @@ def create_post(request):
       
       else:
         new_post.profile = userprofile
+        new_post.date_created = dt.datetime.now()
         new_post.save()
 
         try:

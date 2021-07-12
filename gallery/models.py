@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from tinymce.models import HTMLField
+from django.utils.timezone import now
+import datetime as dt
 
 # Create your models here.
 class FollowChain(models.Model):
@@ -44,6 +46,7 @@ class ImagePost(models.Model):
   image = models.ImageField(upload_to = 'posts/')
   image_name = models.CharField(max_length=100)
   image_caption = HTMLField()
+  date_created = models.DateTimeField(editable=False, blank=True)
   profile = models.ForeignKey(UserProfile, on_delete=CASCADE)
   likes = models.ForeignKey(PostLikes, on_delete=CASCADE,null=True, blank=True)
   comments = models.ForeignKey(PostComment, on_delete=CASCADE,null=True, blank=True)

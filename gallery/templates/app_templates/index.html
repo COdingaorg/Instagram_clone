@@ -68,16 +68,16 @@
         </div>
       </div>
       <div class="card-footer d-flex flex-column bg-white">
-        <strong>{{post.likes.likes.count}} likes</strong>
+        <strong>{% if post.likes.count %}{{post.likes.count}}{%else%} <span class="m-1">0</span>{%endif%}likes</strong>
         <span class="d-flex flex-row">
           <p class="bold">{{post.profile.user.username}}</p>
           <p class="pl-2">{{post.image_caption}}</p>
         </span>
-        <span>View all<a href=""> {{post.comments.comments.id}} comments</a></span>
-        <span class="d-flex flex-row"><a href="" class="pr-2 bold"> follower-1</a>
-          <p>Comment</p>
+        <span>View all<a href=""> {% if post.comments.count %}{{post.comments.count}}{%else%} <span>No</span>{%endif%} comments</a></span>
+        <span class="d-flex flex-row"><a href="" class="pr-2 bold">{% if post.comments.count %}{{post.comments.user_commenter.username}}{%else%} <span></span>{%endif%}</a>
+        {% if post.comments.count %}{{post.comments.comments}}{%else%}<p>No Comment</p>{%endif%}
         </span>
-        <span>days count</span>
+        <i>{{post.date_created|timesince}} ago</i>
       </div>
       <div class="card-footer bg-white">
         <form action="" class="d-flex flex-row mt-3 mb-3" class="emoji">

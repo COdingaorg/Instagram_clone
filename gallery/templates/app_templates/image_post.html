@@ -31,13 +31,12 @@
             </span>
             <!--displays commenter name and comments-->
             {% if comments %}<span class="bold">{{comments.count}}--{%else%}0-{%endif%}comments</span>
-            <span class="d-flex flex-row">
+            <span class="d-flex flex-column">
               {% if comments %}
               {%for comment in comments%}
-              <a href="" class="pr-2 bold">
-                {{comment.user_commenter.username}}:
-              </a>
-              {{comment.comments}}<br>
+              <p><a href="" class="pr-2 bold">{{comment.user_commenter.username}}:</a>
+                {{comment.comments}}
+              </p>
               {%endfor%}
               {%else%}
               <span></span>
@@ -104,9 +103,9 @@
               <input type="text" name="comment" placeholder="Add a comment..." class="col-md-11" required>
               <input type="hidden" name="post_id" value="{{post.id}}">
 
-              <button type="submit"
-                class="post_comment col-md-1 d-flex flex-row align-items-center justify-content-center bold"><a
-                  href="{{ request.META.HTTP_REFERER }}">Post</a></button>
+              <button type="submit" class="post_comment col-md-1 d-flex flex-row align-items-center justify-content-center bold">
+                <a href="{{ request.META.HTTP_REFERER }}">Post</a>
+              </button>
             </form>
           </div>
         </div>

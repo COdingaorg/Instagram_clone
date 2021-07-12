@@ -208,6 +208,10 @@ button>svg{
   margin-left:9vw;
   line-height: 1.6em;
 }
+.alert_window>button{
+  width: 20px;
+  height: 10px;
+}
 .user-details{
   margin-top: -6vh;
 }

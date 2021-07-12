@@ -5,18 +5,21 @@
 
 {% block content%}
 <div class="profile_page row bg-light mt-100 d-flex justify-content-center align-items-center">
-  {% for message in messages%}
-  {{message}}
-  {%endfor%}
 
-  
+
+
   <div class="col-md-2 bg-light"></div>
   <div class="col-md-8">
     <div class=" profile_pg">
       <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="">
     </div>
     <div class="user-details d-flex flex-column align-items-center justify-content-start">
-
+      {% for message in messages%}
+      <div class="alert_window alert alert-warning alert-dismissible fade show z-index-4 position-fixed">
+        <strong>Warning!</strong>--<p>{{message}}</p>
+        <button type="button" data-dismiss="alert" class="bg-primary w-25 h-10 text-center" ><p class="w-100 h-100" data-toggle="modal" data-target="#exampleModalLong">create</p></button>
+      </div>
+      {%endfor%}
       <div class="user_sam d-flex flex-row align-items-center justify-content-start">
         <p class="profile_username ml-auto">{{request.user.username}}</p>
         <strong><button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Edit
@@ -30,7 +33,8 @@
       </div>
       <div class="follow d-flex flex-row align-items-start justify-content-start">
         <p class="ml-auto">{{user_profile.posts}} Posts</p>
-        <p class="pr-4 pl-4">{% if user_profile.followers %} {{user_profile.followers}}{%else%} 0 {%endif%}Followers </p>
+        <p class="pr-4 pl-4">{% if user_profile.followers %} {{user_profile.followers}}{%else%} 0 {%endif%}Followers
+        </p>
         <p>{% if user_profile.followers %} {{user_profile.followers}}{%else%} 0 {%endif%} Following</p>
       </div>
       <div class="names d-flex flex-row align-items-center ">
@@ -52,7 +56,8 @@
             <p class="text-center">Share your style, moment, opinion, video, skill, art... anything really</p>
           </div>
           <div class="card-footer d-flex align-items-center justify-content-center">
-            <a href="{% url 'create_post' %}"><button type="button" id='add_post_btn' class="p-auto text-center btn btn-primary">Add Post</button></a>
+            <a href="{% url 'create_post' %}"><button type="button" id='add_post_btn'
+                class="p-auto text-center btn btn-primary">Add Post</button></a>
           </div>
         </div>
       </div>
@@ -73,12 +78,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLongTitle">Update Profile</h5><img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile" width="30px" height="30px">
+        <h5 class="modal-title text-center" id="exampleModalLongTitle">Update Profile</h5><img
+          src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile" width="30px" height="30px">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{% url 'profile'%}" method="POST", enctype="multipart/form-data">
+      <form action="{% url 'profile'%}" method="POST" , enctype="multipart/form-data">
         {%csrf_token%}
         <div class="modal-body">
           <!--Update profile form-->
@@ -88,7 +94,7 @@
           <!--end of form -->
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="close btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
       </form>

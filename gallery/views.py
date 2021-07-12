@@ -101,15 +101,23 @@ def create_post(request):
 
       #find if a user has a profile, then attach post to it ,
       # else prompt to create one, then save the details
-      try:
-        userprofile = UserProfile.objects.get(user = current_user_id)
-      except UserProfile.DoesNotExist:
-        userprofile = 'empty'
+      def get_user_profile():
+        try:
+          userprofile = UserProfile.objects.get(user = current_user_id)
+        except UserProfile.DoesNotExist:
+          userprofile = None
+        
+        return userprofile
 
-      if userprofile == 'empty':
+      userprofile = get_user_profile()
+      if not userprofile:
         path = request.path
-        info = messages.error(request, 'Your Profile is Empty. Create one to proceed')
-        return redirect('profile', {'info':info, 'path':path})
+        messages.warning(request,'Your Profile is Empty. Create one to proceed')
+
+        context = {
+          'path':path,
+        }
+        return HttpResponseRedirect('/profile', context)
       
       else:
         new_post.profile = userprofile

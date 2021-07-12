@@ -325,3 +325,24 @@ button.edit_profile{
 .card{
   border: 1px solid white;
 }
+/*styling image post page*/
+.image_post{
+  margin-top: 15vh;
+  margin-bottom: 20vh;
+}
+.columns_disp::-webkit-scrollbar{
+  display: none;
+}
+.columns_disp{
+  max-height: 65%;
+  width: 130%;
+  overflow: scroll;
+}
+.icons_display{
+  width: 150%;
+}
+.time{
+  color: grey;
+  font-size: .8em;
+  text-transform: uppercase;
+}

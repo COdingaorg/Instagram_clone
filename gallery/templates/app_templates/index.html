@@ -15,17 +15,22 @@
   <!-- section for posts-->
   <div class="col-md-5 row post-section">
     <div class="stories mb-10">
-
+      <!--placeholder-->
     </div>
     <!--posts-->
+    {% if all_posts%}
+    {% for post in all_posts%}
+    <!--start of posts loop-->
+
     <div class="user-posts card col-md-12 p-0 mt-0">
       <div class="card-header bg-white d-flex flex-row align-items-center">
-        <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile" class="thumbnail p-0 mr-5 ">
-        <strong class="postusername p-auto">{{request.user.username}}</strong>
+        <img src="{{post.profile.photo_path.url}}" alt="{{post.profile.user.username}}"
+          class="thumbnail p-0 mr-5 ">
+        <strong class="postusername p-auto">{{post.profile.user.username}}</strong>
         <strong class="p-auto ml-auto ellip"><a href="">&hellip;</a></strong>
       </div>
       <div class="card-image">
-        <img src="../../static/images/KlR73L.jpeg" alt="">
+        <img src="{{post.image.url}}" alt="{{post.image_name}}">
       </div>
       <div class="card-footer bg-white">
         <div class="d-flex flex-row">
@@ -63,12 +68,12 @@
         </div>
       </div>
       <div class="card-footer d-flex flex-column bg-white">
-        <strong>546 likes</strong>
+        <strong>{{post.likes.likes.id}} likes</strong>
         <span class="d-flex flex-row">
-          <p class="bold">{{request.user.username}}</p>
-          <p class="pl-2">{{request.user.caption}} sample caption here</p>
+          <p class="bold">{{post.profile.user.username}}</p>
+          <p class="pl-2">{{post.image_caption}}</p>
         </span>
-        <span>View all<a href=""> 111,240 comments</a></span>
+        <span>View all<a href=""> {{post.comments.comments.id}} comments</a></span>
         <span class="d-flex flex-row"><a href="" class="pr-2 bold"> follower-1</a>
           <p>Comment</p>
         </span>
@@ -84,6 +89,11 @@
         </form>
       </div>
     </div>
+    {%endfor%}
+    {%else%}
+    <p class="text-center">No posts available</p>
+    {%endif%}
+    <!--End of Loop-->
   </div>
 
   <!-- section for suggestions -->
@@ -111,7 +121,8 @@
 
       <!--Loop suggestions here-->
       <div class="follow d-flex flex-row mt-4 row">
-        <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile" class="profileimage ml-auto">
+        <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="profile"
+          class="profileimage ml-auto">
         <span class="d-flex flex-column ml-auto"><strong>Leomessi</strong>
           <p>popular</p>
         </span>

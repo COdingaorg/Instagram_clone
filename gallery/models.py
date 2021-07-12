@@ -26,14 +26,19 @@ class UserProfile(models.Model):
   @classmethod
   def update_bio(cls, id, new_bio):
     to_update = cls.objects.filter(pk = id).update(bio = new_bio)
+    return to_update
 
 class PostLikes(models.Model):
   likes = models.IntegerField(auto_created=True)
   user_liker = models.ForeignKey(User, on_delete=CASCADE)
+  class Meta:
+    ordering = ['-id']
 
 class PostComment(models.Model):
   comments = models.CharField(max_length = 260)
   user_commenter = models.ForeignKey(User, on_delete=CASCADE)
+  class Meta:
+    ordering = ['-id']
 
 class ImagePost(models.Model):
   image = models.ImageField(upload_to = 'posts/')

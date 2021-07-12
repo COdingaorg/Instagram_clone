@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile, User
+from .models import ImagePost, UserProfile, User
 
 # Create your views here.
 #register user view function
@@ -37,12 +37,24 @@ def index(request):
 
   
   try:
-      user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
+    user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
   except UserProfile.DoesNotExist:
     user_profile = None
+
+  #collecting posts
+  try:
+    all_posts = ImagePost.objects.all()
+    message = 'success'
+  except ImagePost.DoesNotExist:
+    all_posts = None
+    message = 'Try failed'
+
+  
   context = {
+    'all_posts':all_posts,
     'user_profile':user_profile,
-    'title':title
+    'title':title,
+    'message':message,
   }
   return render(request, 'app_templates/index.html', context)
 

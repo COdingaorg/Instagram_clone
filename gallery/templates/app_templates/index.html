@@ -24,11 +24,11 @@
     <!--start of posts loop-->
 
     <div class="user-posts card col-md-12 p-0 mt-0">
-      <div class="card-header bg-white d-flex flex-row align-items-center">
-        <a class="dropdown-item" href="{% url 'profile' %}"><img src="{{post.profile.photo_path.url}}" alt="{{post.profile.user.username}}" class="thumbnail p-0 mr-5 "></a>
+      <div class="card-header bg-white d-flex align-items-center">
+        <a class="" href="{% url 'profile' %}"><img src="{{post.profile.photo_path.url}}" alt="{{post.profile.user.username}}" class="thumbnail p-0 mr-5 "></a>
         
-        <strong class="postusername p-auto">{{post.user.username}}</strong>
-        <strong class="p-auto ml-auto ellip"><a href="">&hellip;</a></strong>
+        <strong class="postusername d-flex mr-auto">@{{post.profile.user.username}}</strong>
+        <strong class="ml-auto ellip"><a href="">&hellip;</a></strong>
       </div>
       <div class="card-image">
         <a href="{% url 'open_post' post.id %}"><img src="{{post.image.url}}" alt="{{post.image_name}}"></a>

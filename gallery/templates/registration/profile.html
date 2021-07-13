@@ -50,8 +50,7 @@
 
         {% for post in user_posts%}
         <div class="post_selection">
-          <img src="{{post.image.url}}" class="user_posts" alt="{{post.image_name}}">
-
+          <a href="{% url 'open_post' post.id %}"><img src="{{post.image.url}}" class="user_posts" alt="{{post.image_name}}"></a>
         </div>
         {%endfor%}
 

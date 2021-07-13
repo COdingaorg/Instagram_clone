@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import ImagePost, PostComment, PostLikes, UserProfile, User
+from .models import FollowChain, Follower, ImagePost, PostComment, PostLikes, UserProfile, User
 import datetime as dt
 
 # Create your views here.
@@ -118,8 +118,24 @@ def profile(request):
     except ImagePost.DoesNotExist:
       user_posts = None
 
+    try:
+
+      followings = FollowChain.objects.filter(user_profile=user_prof_id)
+    except ImagePost.DoesNotExist:
+      followings = None
+
+    try:
+      
+      followers = Follower.objects.filter(user_profile=user_prof_id)
+    except ImagePost.DoesNotExist:
+      followers = None
+
+    
+
     form = UpdateProfile
     context = {
+      'followers':followers,
+      'followings':followings,
       'user_posts':user_posts,
       'user_profile':user_profile,
       'form':form,

@@ -5,20 +5,10 @@ from tinymce.models import HTMLField
 import datetime as dt
 
 # Create your models here.
-class FollowChain(models.Model):
-  follow = models.ForeignKey(User, on_delete=CASCADE)
-  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
-
-class Follower(models.Model):
-  followers = models.ForeignKey(User, on_delete=CASCADE)
-  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
-
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'gallery/')
   bio = models.CharField(max_length=200)
   user = models.ForeignKey(User, on_delete=CASCADE)
-  follows = models.ForeignKey(FollowChain, on_delete=CASCADE,null=True, blank=True)
-  followers = models.ForeignKey(Follower, on_delete=CASCADE,null=True, blank=True)
   date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
 
   def save_profile(self):
@@ -31,6 +21,17 @@ class UserProfile(models.Model):
   def update_bio(cls, id, new_bio):
     to_update = cls.objects.filter(pk = id).update(bio = new_bio)
     return to_update
+
+class FollowChain(models.Model):
+  follow = models.ForeignKey(User, on_delete=CASCADE)
+  user_profile = models.ForeignKey(UserProfile, on_delete=CASCADE,null=True, blank=True)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
+
+class Follower(models.Model):
+  followers = models.ForeignKey(User, on_delete=CASCADE)
+  user_profile = models.ForeignKey(UserProfile, on_delete=CASCADE,null=True, blank=True)
+  date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
+
 
 class ImagePost(models.Model):
   image = models.ImageField(upload_to = 'posts/')

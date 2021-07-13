@@ -17,8 +17,8 @@
       <form action="{% url 'follow_followed' %}" method="POST">
         {%csrf_token%}
         <input type="hidden" name="strangeid" value='{{user.id}}'>
-        <a href="" class="btn btn-primary"><button type="submit"
-            class="bg-transparent border-0 bold">Follow</button></a>
+        <a href="" class="z-index-1"><button type="submit"
+            class="bg-transparent border-0 bold z-index-2 w-100">Follow</button></a>
       </form>
 
     </div>

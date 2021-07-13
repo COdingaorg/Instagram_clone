@@ -7,7 +7,7 @@ import datetime as dt
 # Create your models here.
 class UserProfile(models.Model):
   photo_path = models.ImageField(upload_to = 'gallery/')
-  bio = models.CharField(max_length=200)
+  bio = models.CharField(max_length=200, default='No profile for this user, You cannot follow')
   user = models.ForeignKey(User, on_delete=CASCADE)
   date_created = models.DateTimeField(default=dt.datetime.now(), editable=False, blank=True)
 

@@ -12,6 +12,7 @@
       <a href="{% url 'create_post' %}"><img src="../../static/images/add-new.png" alt="add new post"></a>
     </div>
   </div>
+  {{path}}
   <!-- section for posts-->
   <div class="col-md-5 row post-section">
     <div class="stories mb-10">
@@ -24,8 +25,9 @@
 
     <div class="user-posts card col-md-12 p-0 mt-0">
       <div class="card-header bg-white d-flex flex-row align-items-center">
-        <img src="{{post.profile.photo_path.url}}" alt="{{post.profile.user.username}}" class="thumbnail p-0 mr-5 ">
-        <strong class="postusername p-auto">{{post.profile.user.username}}</strong>
+        <a class="dropdown-item" href="{% url 'profile' %}"><img src="{{post.profile.photo_path.url}}" alt="{{post.profile.user.username}}" class="thumbnail p-0 mr-5 "></a>
+        
+        <strong class="postusername p-auto">{{post.user.username}}</strong>
         <strong class="p-auto ml-auto ellip"><a href="">&hellip;</a></strong>
       </div>
       <div class="card-image">
@@ -99,7 +101,7 @@
       </div>
       <!--Adding comment-->
       <div class="card-footer bg-white">
-        <form action="{% url 'add_comment'%}" class="d-flex flex-row mt-3 mb-3 emoji" method="POST">
+        <form action="{% url 'add_comment' %}" class="d-flex flex-row mt-3 mb-3 emoji" method="POST">
           {%csrf_token%}
           <img src="../../static/images/smile.png" alt="smiley" width="30px" height="30px" class="mr-1">
           <input type="text" name="comment" placeholder="Add a comment..." class="col-md-10" required>

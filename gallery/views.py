@@ -1,4 +1,4 @@
-from django.http.response import HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
@@ -95,6 +95,7 @@ def profile(request):
   displays posts created by user
   shows followers count and followings
   '''
+  userid = request.user.id
   title = 'profile - Pinstagram'
   if request.method == 'POST':
     form = UpdateProfile(request.POST, request.FILES)
@@ -107,17 +108,20 @@ def profile(request):
 
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   else:
-    current_user_id = request.user.id
+    current_user_id = userid
     try:
       user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
     except UserProfile.DoesNotExist:
       user_profile = None
+      message = 'This user has no profile'
+      raise Http404('It Failed here')
 
     try:
-      user_prof_id = UserProfile.objects.get(user=request.user.id).id
+      user_prof_id = UserProfile.objects.get(user=userid).id
       user_posts = ImagePost.objects.filter(profile = user_prof_id)
     except ImagePost.DoesNotExist:
       user_posts = None
+      raise Http404('Now it stopped here')
 
     try:
 
@@ -180,6 +184,8 @@ def create_post(request):
         new_post.date_created = dt.datetime.now()
         new_post.save()
 
+        messages.success(request, 'Post Created successfully')
+
         try:
           return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         except:
@@ -188,6 +194,7 @@ def create_post(request):
   else:
     form = AddNewPost
     context = {
+      
       'form':form,
       'title':title,
       }
@@ -200,7 +207,8 @@ def search_user(request):
     search_term = request.GET.get('search_term')
 
     users = User.objects.filter(username__icontains = search_term)
-    context = {
+
+    context = { 
       'search_term':search_term,
       'users':users,
       'title':title,

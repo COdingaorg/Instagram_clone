@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from gallery import views
 from django.conf import settings
+from django.urls import path
+
 
 urlpatterns = [
   url(r'^$', views.index, name = 'home'),

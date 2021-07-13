@@ -27,6 +27,9 @@
       <form action="{% url 'create_post'%}" method="POST" class="create_post_form p-3" enctype="multipart/form-data">
         <a href="{%url 'home' %}"><button type="button" class="btn btn-warning ml-auto">close</button></a>
         <h3 class="text-center">Share Your Post</h3>
+        {% for message in messages%}
+        <p class="alert-success text center">{{message}}</p>
+        {%endfor%}
         {%csrf_token%}
         {{form.as_p}}
 

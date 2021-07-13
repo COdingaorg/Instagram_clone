@@ -62,7 +62,7 @@ def index(request):
     message = 'Try failed'
 
   #returning number of likes and comments
-  post_id = 5
+  post_id = 5 #change to a variable
   try:
     likes = PostLikes.objects.filter(post=post_id)
   except PostLikes.DoesNotExist:
@@ -70,7 +70,7 @@ def index(request):
   #eturning comments count
   try:
     comments = PostComment.objects.filter(post=post_id)
-    top_comment = comments.first()
+    top_comment = PostComment.objects.filter(post=post_id).first()
   except PostComment.DoesNotExist:
     comments = None
 

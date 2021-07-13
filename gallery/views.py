@@ -293,31 +293,25 @@ def open_post(request, sentid):
   return render(request, 'app_templates/image_post.html', context)
 
 #adds a following and follow capability
-def follow_followed(request, strangeid):
+def follow_followed(request):
   '''
   view function that enables following and follows
   '''
-
+  user_id = request.user.id
   if request.method == 'POST':
-    stranger_id= strangeid
-    user_id = request.get.user.id
-    user_profile = UserProfile.objects.get(user = user_id).id
-    stranger_profile = UserProfile.objects.get(user = stranger_id).id
+    user = User.objects.get(id = user_id)
+    stranger_id= request.POST.get('strangeid')
+    stranger = User.objects.get(id = stranger_id)
+    user_profile = UserProfile.objects.get(user = user_id)
+    stranger_profile = UserProfile.objects.get(user = stranger_id)
 
     #user is following the stranger hence its a user's following
-    follow = FollowChain(follow = stranger_id, user_profile = user_profile)
+    follow = FollowChain(follow = stranger, user_profile = user_profile)
     #user following a stranger is a strangers follower
-    follower = Follower(followers = user_id, user_profile = stranger_profile)
+    follower = Follower(followers = user, user_profile = stranger_profile)
 
     follow.save()
     follower.save()
-
-    imagepost = ImagePost.objects.get(id = request.POST.get('post_like'))
-    date_created = dt.datetime.now()
-    user_like = User.objects.get(id = request.user.id)
-    
-    new_like = PostLikes(user_liker = user_like, date_created = date_created, post = imagepost)
-    new_like.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

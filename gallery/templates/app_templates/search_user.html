@@ -14,7 +14,7 @@
     <div class="card-body">
       <h5 class="card-title">@{{user.username}}</h5>
       <p class="card-text">{{user.first_name}} _ {{user.last_name}}</p>
-      <a href="#" class="btn btn-primary">Follow</a>
+      <a href="{% url 'follow_user' user.id %}" class="btn btn-primary">Follow</a>
     </div>
   </div>
 

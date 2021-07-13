@@ -12,6 +12,7 @@ urlpatterns = [
   url(r'^add_comment/$', views.add_comment, name = 'add_comment'),
   url(r'^post/like/', views.add_like, name = 'like post'),
   url(r'^post/(\d+)$', views.open_post, name = 'open_post'),
+  url(r'^follow/(d+)$', views.follow_followed, name = 'follow_user')
 ]
 if settings.DEBUG:
   urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

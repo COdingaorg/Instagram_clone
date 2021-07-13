@@ -6,11 +6,11 @@
 {% block content%}
 <div class="profile_page row bg-light mt-100 d-flex justify-content-center align-items-center">
   <div class="col-md-2 bg-light"></div>
-  <div class="col-md-8">
-    <div class=" profile_pg">
+  <div class="col-md-8 row">
+    <div class="profile_pg col-m-3">
       <img src="{%if user_profile %}{{user_profile.photo_path.url}}{%endif%}" alt="">
     </div>
-    <div class="user-details d-flex flex-column align-items-center justify-content-start">
+    <div class="user-details col-md-8 d-flex flex-column align-items-center justify-content-start">
       {% for message in messages%}
       <div class="alert_window alert alert-warning alert-dismissible fade show z-index-4 position-fixed">
         <strong>Warning!</strong>--<p>{{message}}</p>
@@ -19,7 +19,7 @@
         </button>
       </div>
       {%endfor%}
-      <div class="user_sam d-flex flex-row align-items-center justify-content-start">
+      <div class="user_sam d-flex flex-row align-items-center justify-content-felx-start">
         <p class="profile_username ml-auto">{{request.user.username}}</p>
         <strong><button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Edit
             Profile</button></strong>
@@ -30,11 +30,11 @@
           </path>
         </svg>
       </div>
-      <div class="follow d-flex flex-row align-items-start justify-content-start">
-        <p class="ml-auto">{{user_profile.posts}} Posts</p>
-        <p class="pr-4 pl-4">{% if user_profile.followers %} {{user_profile.followers}}{%else%} 0 {%endif%}Followers
+      <div class="follow d-flex ">
+        <p class="ml-5">{{user_posts.count}} Posts</p>
+        <p class="pr-4 pl-4">{% if followers %} {{followers.count}}{%else%} 0 {%endif%}Followers
         </p>
-        <p>{% if user_profile.followers %} {{user_profile.followers}}{%else%} 0 {%endif%} Following</p>
+        <p>{% if followings %} {{followings.count}}{%else%} 0 {%endif%} Following</p>
       </div>
       <div class="names d-flex flex-row align-items-center ">
         <strong class="ml-auto">{{request.user.first_name}}</strong><strong>{{request.user.last_name}}</strong>

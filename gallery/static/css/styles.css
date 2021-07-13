@@ -223,6 +223,7 @@ button>svg{
   height: 160px;
 }
 .profile_pg>img{  
+  margin-top: -5vh;
   border-radius: 50%;
   border: 1px solid rgb(200, 200, 200);
   overflow: hidden;
@@ -231,7 +232,7 @@ button>svg{
   border: 3px solid rgb(248,75,107);
 }
 .profile_username{
-  font-size: 3em;
+  font-size: 2em;
   font-weight: lighter;
   margin-left:9vw;
   line-height: 1.6em;
@@ -256,8 +257,9 @@ button.edit_profile{
   background-color: rgba(200, 200, 200, 0);
 } 
 .user_sam{
-  margin-top: -20vh;
-  margin-left: -.8vw;
+  margin-top: 15vh;
+  padding: 0vh 3vw;
+  height: 10vh;
 }
 /*stylign posts in profile page*/
 .new_post{
@@ -355,6 +357,9 @@ button.edit_profile{
   height: auto;
   margin: 1vh;
   max-height: 50vh;
+}
+.a_user_post{
+  padding: 2vh;
 }
 .post_selection>img:hover{
   width: 55vh;

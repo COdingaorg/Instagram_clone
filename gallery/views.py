@@ -93,6 +93,7 @@ def profile(request):
   view function that renders profile template data
   displays current user profile data
   displays posts created by user
+  shows followers count and followings
   '''
   title = 'profile - Pinstagram'
   if request.method == 'POST':

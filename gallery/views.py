@@ -92,6 +92,7 @@ def profile(request):
   '''
   view function that renders profile template data
   displays current user profile data
+  displays posts created by user
   '''
   title = 'profile - Pinstagram'
   if request.method == 'POST':
@@ -110,8 +111,16 @@ def profile(request):
       user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
     except UserProfile.DoesNotExist:
       user_profile = None
+
+    try:
+      user_prof_id = UserProfile.objects.get(user=request.user.id).id
+      user_posts = ImagePost.objects.filter(profile = user_prof_id)
+    except ImagePost.DoesNotExist:
+      user_posts = None
+
     form = UpdateProfile
     context = {
+      'user_posts':user_posts,
       'user_profile':user_profile,
       'form':form,
       'title':title,
@@ -155,9 +164,9 @@ def create_post(request):
         new_post.save()
 
         try:
-          return redirect('home')
-        except:
           return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        except:
+          return redirect('home')
          
   else:
     form = AddNewPost

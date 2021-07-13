@@ -44,16 +44,20 @@
     </div>
     <hr>
     <!--Loop posts here-->
-    {% if posts %}
+    {% if user_posts %}
     <div class="a_user_post col-md-12">
-      {% for post in user_posts%}
-      <div class="col-md-3">
-        <img src="{{post.image.url}}" alt="{{post.image_name}}">
-        <p class="alert-warning">
-          {{post.image_name}}
-        </p>
+      <div class="d-flex col-md-12 flex-wrap">
+
+        {% for post in user_posts%}
+        <div class="post_selection">
+          <img src="{{post.image.url}}" class="user_posts" alt="{{post.image_name}}">
+
+        </div>
+        {%endfor%}
+
       </div>
-      {%endfor%}
+
+
       {%else%}
       <!--if not posts-->
       <div class="posts_loop bg-light">

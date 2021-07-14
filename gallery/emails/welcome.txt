@@ -1,0 +1,5 @@
+Hello,{{name}}
+Thank you for Signing up. You are awesome, so are your ideas. Share them, let others enjoy and like.
+As you do.
+Welcome to Pinstagram
+  Like it, share it, love it...Live it

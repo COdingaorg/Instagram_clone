@@ -17,7 +17,7 @@
     </button>
   </form>
   <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav d-flex align-items-center">
       <li class="nav-item active">
         <a class="nav-link" href="#">
           <svg aria-label="Home" class="_8-yf5 " fill="#262626" height="22" role="img" viewBox="0 0 48 48" width="22">
@@ -76,6 +76,10 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
         </div>
+      </li>
+      <li class="border-top border-danger nav-item">
+        <p>{{request.user.username}}</p>
+        </a>
       </li>
     </ul>
 

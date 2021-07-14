@@ -1,5 +1,4 @@
-from os import sendfile
-from django.http.response import Http404, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django_heroku.core import settings
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
@@ -51,7 +50,7 @@ def index(request):
 
   
   try:
-    user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
+    user_profile = UserProfile.objects.filter(user = current_user_id).last()
   except UserProfile.DoesNotExist:
     user_profile = None
 
@@ -112,27 +111,30 @@ def profile(request):
     if form.is_valid():
       photo = form.cleaned_data['photo']
       bio = form.cleaned_data['bio']
-      user_id = request.user.id
-      new_profile = UserProfile(photo_path = photo, bio = bio, user_id = user_id)
+      new_profile = UserProfile(photo_path = photo, bio = bio, user_id = userid)
       new_profile.save_profile()
 
+    try:
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    except:
+      return redirect('profile')
   else:
     form = UpdateProfile
-    current_user_id = userid
-    user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
+    current_user_id = request.user.id
+    try:
+      user_profile = UserProfile.objects.filter(user = current_user_id).last()
+    except UserProfile.DoesNotExist:
+      user_profile = None
 
     if user_profile:
+      user_prof_id = user_profile.id
 
       try:
-        user_prof_id = UserProfile.objects.get(user=userid).id
         user_posts = ImagePost.objects.filter(profile = user_prof_id)
       except ImagePost.DoesNotExist:
         user_posts = None
-        raise Http404('Now it stopped here')
 
       try:
-
         followings = FollowChain.objects.filter(user_profile=user_prof_id)
       except ImagePost.DoesNotExist:
         followings = None
@@ -144,6 +146,7 @@ def profile(request):
         followers = None
 
       context = {
+        'user_profile':user_profile,
         'followers':followers,
         'followings':followings,
         'user_posts':user_posts,
@@ -151,7 +154,7 @@ def profile(request):
         'form':form,
         'title':title,
       }
-
+      return render(request, 'registration/profile.html', context)
 
     else:
       context = {
@@ -173,25 +176,12 @@ def create_post(request):
 
       #find if a user has a profile, then attach post to it ,
       # else prompt to create one, then save the details
-      def get_user_profile():
-        userprofile = UserProfile.objects.get(user = current_user_id)
-        
-        if userprofile:
-          return userprofile
-        else:
-          userprofile = 'empty'
-          return userprofile
 
-      userprofile = get_user_profile()
-      if userprofile=='empty':
-        path = request.path
+      userprofile = UserProfile.objects.filter(user = current_user_id).last()
+      if not userprofile:
         messages.warning(request,'Your Profile is Empty. Create one to proceed')
 
-        context = {
-          'path':path,
-        }
         return redirect('profile')
-      
       else:
         new_post.profile = userprofile
         new_post.date_created = dt.datetime.now()
@@ -281,7 +271,7 @@ def open_post(request, sentid):
   title = f'{request.user.username}\'s post'
 
   try:
-    user_profile = UserProfile.objects.filter(user = request.user.id).order_by('id').first()
+    user_profile = UserProfile.objects.filter(user = request.user.id).last()
   except UserProfile.DoesNotExist:
     user_profile = None
 
@@ -328,8 +318,8 @@ def follow_followed(request):
     user = User.objects.get(id = user_id)
     stranger_id= request.POST.get('strangeid')
     stranger = User.objects.get(id = stranger_id)
-    user_profile = UserProfile.objects.get(user = user_id)
-    stranger_profile = UserProfile.objects.get(user = stranger_id)
+    user_profile = UserProfile.objects.filter(user = user_id).last()
+    stranger_profile = UserProfile.objects.filter(user = stranger_id).last()
 
     #user is following the stranger hence its a user's following
     follow = FollowChain(follow = stranger, user_profile = user_profile)

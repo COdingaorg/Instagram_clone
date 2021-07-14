@@ -12,9 +12,9 @@
     </div>
     <div class="user-details col-md-8 d-flex flex-column align-items-center justify-content-start">
       {% for message in messages%}
-      <div class="alert_window alert alert-warning alert-dismissible fade show z-index-4 position-fixed">
+      <div class="alert_window create_account_alert alert alert-warning alert-dismissible fade show z-index-4 position-fixed mt-5">
         <strong>Warning!</strong>--<p>{{message}}</p>
-        <button type="button" data-dismiss="alert" class="bg-primary w-25 h-30 text-center">
+        <button type="button" data-dismiss="alert" class="bg-primary w-25 h-25 text-center">
           <p class="w-100 h-100" data-toggle="modal" data-target="#exampleModalLong">create</p>
         </button>
       </div>
@@ -22,19 +22,28 @@
       <div class="user_sam d-flex flex-row align-items-center justify-content-felx-start">
         <p class="profile_username ml-auto">{{request.user.username}}</p>
         <!--if it is the owner, edit profile, else, follow-->
-        {% if request.user.id == user_profile.user.id%}
-        <strong><button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Edit
-            Profile</button></strong>
-        {%else%}
-        
-
-
-        <form action="{% url 'follow_followed' %}" method="POST">
-          {%csrf_token%}
-          <input type="hidden" name="strangeid" value='{{user_profile.user.id}}'>
-          <strong><button type="submit" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Follow</button></strong>
-        </form>
-        {%endif%}
+        {%if user_profile %}
+          {% if request.user.id != user_profile.user.id%}
+          <form action="{% url 'follow_followed' %}" method="POST">
+            {%csrf_token%}
+            <input type="hidden" name="strangeid" value='{{user_profile.user.id}}'>
+            <strong><button type="submit" data-toggle="modal" data-target="#exampleModalLong"
+                class="edit_profile">Follow</button></strong>
+          </form>
+          {%else%}
+          <strong>
+            <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Edit
+              Profile
+            </button>
+          </strong>
+          {%endif%}
+          {%else%}
+          <strong>
+            <button type="button" data-toggle="modal" data-target="#exampleModalLong" class="edit_profile">Edit
+              Profile
+            </button>
+          </strong>
+          {%endif%}
 
         <svg aria-label="Options" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24">
           <path clip-rule="evenodd"
@@ -63,7 +72,8 @@
 
         {% for post in user_posts%}
         <div class="post_selection">
-          <a href="{% url 'open_post' post.id %}"><img src="{{post.image.url}}" class="user_posts" alt="{{post.image_name}}"></a>
+          <a href="{% url 'open_post' post.id %}"><img src="{{post.image.url}}" class="user_posts"
+              alt="{{post.image_name}}"></a>
         </div>
         {%endfor%}
 
@@ -111,7 +121,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="{% url 'profile'%}" method="POST" , enctype="multipart/form-data">
+      <form action="{% url 'profile'%}" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
         <div class="modal-body">
           <!--Update profile form-->

@@ -118,46 +118,48 @@ def profile(request):
 
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
   else:
-    current_user_id = userid
-    try:
-      user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
-    except UserProfile.DoesNotExist:
-      user_profile = None
-      message = 'This user has no profile'
-      raise Http404('It Failed here')
-
-    try:
-      user_prof_id = UserProfile.objects.get(user=userid).id
-      user_posts = ImagePost.objects.filter(profile = user_prof_id)
-    except ImagePost.DoesNotExist:
-      user_posts = None
-      raise Http404('Now it stopped here')
-
-    try:
-
-      followings = FollowChain.objects.filter(user_profile=user_prof_id)
-    except ImagePost.DoesNotExist:
-      followings = None
-
-    try:
-      
-      followers = Follower.objects.filter(user_profile=user_prof_id)
-    except ImagePost.DoesNotExist:
-      followers = None
-
-    
-
     form = UpdateProfile
-    context = {
-      'followers':followers,
-      'followings':followings,
-      'user_posts':user_posts,
-      'user_profile':user_profile,
-      'form':form,
-      'title':title,
-    }
-  
-    return render(request, 'registration/profile.html', context)
+    current_user_id = userid
+    user_profile = UserProfile.objects.filter(user = current_user_id).order_by('id').first()
+
+    if user_profile:
+
+      try:
+        user_prof_id = UserProfile.objects.get(user=userid).id
+        user_posts = ImagePost.objects.filter(profile = user_prof_id)
+      except ImagePost.DoesNotExist:
+        user_posts = None
+        raise Http404('Now it stopped here')
+
+      try:
+
+        followings = FollowChain.objects.filter(user_profile=user_prof_id)
+      except ImagePost.DoesNotExist:
+        followings = None
+
+      try:
+        
+        followers = Follower.objects.filter(user_profile=user_prof_id)
+      except ImagePost.DoesNotExist:
+        followers = None
+
+      context = {
+        'followers':followers,
+        'followings':followings,
+        'user_posts':user_posts,
+        'user_profile':user_profile,
+        'form':form,
+        'title':title,
+      }
+
+
+    else:
+      context = {
+        'form':form,
+        'title':title,
+      }
+    
+      return render(request, 'registration/profile.html', context)
 
 @login_required(login_url='login')
 def create_post(request):
@@ -172,22 +174,23 @@ def create_post(request):
       #find if a user has a profile, then attach post to it ,
       # else prompt to create one, then save the details
       def get_user_profile():
-        try:
-          userprofile = UserProfile.objects.get(user = current_user_id)
-        except UserProfile.DoesNotExist:
-          userprofile = None
+        userprofile = UserProfile.objects.get(user = current_user_id)
         
-        return userprofile
+        if userprofile:
+          return userprofile
+        else:
+          userprofile = 'empty'
+          return userprofile
 
       userprofile = get_user_profile()
-      if not userprofile:
+      if userprofile=='empty':
         path = request.path
         messages.warning(request,'Your Profile is Empty. Create one to proceed')
 
         context = {
           'path':path,
         }
-        return HttpResponseRedirect('/profile', context)
+        return redirect('profile')
       
       else:
         new_post.profile = userprofile

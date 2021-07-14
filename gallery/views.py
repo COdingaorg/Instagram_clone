@@ -22,8 +22,8 @@ def register_user(request):
   if request.method == 'POST':
     form = RegisterNewUser(request.POST)
     if form.is_valid():
-      uname = form.request.POST.get['username']
-      uemail = form.request.POST.get('email')
+      uname = form.cleaned_data['username']
+      uemail = form.cleaned_data['email']
       form.save()
       send_new_user_email(uname , uemail)
       messages.success(request, 'Account Created Successfully!. Check out our Email later :)')

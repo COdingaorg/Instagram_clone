@@ -1,23 +1,12 @@
-{% extends 'django_registration/base.html' %}
-{% load bootstrap3%}
-{% load static %}
-{% load mathfilters %}
-{% block styles%}
-{{block.super}}
-<link rel="stylesheet" href="{% static 'css/login_styles.css' %}">
-{%endblock%}
-
-{% block content%}
-
 <h1 class="nav-brand">Pinstagram</h1>
 <div class="container" id="container">
   
   <div class="form-container sign-in-container">
       <h1>Hello,</h1>{{name}}
       <hr>
-      <h5>Thank you for Signing up. You are awesome, so are your ideas. Share them, let others enjoy and like.
+      <p>Thank you for Signing up. You are awesome, so are your ideas. Share them, let others enjoy and like.
         As you do yourself.
-      </h5>
+      </p>
   </div>
   <div class="overlay-container">
     <div class="overlay">

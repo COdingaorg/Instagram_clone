@@ -1,8 +1,7 @@
-from gallery.models import ImagePost, UserProfile
+from .models import ImagePost
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from tinymce.models import HTMLField
 
 class RegisterNewUser(UserCreationForm):
   class Meta:

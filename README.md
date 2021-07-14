@@ -7,19 +7,19 @@ Future releases to enable filtering a follow list suggestions.
 
 # User journey.
 A user visits the site. 
-|_A user Registers to the website. 
-  |_A user Logs in
-    |__A user sees images shared on the homepage.
-      |_A user likes an post image.
-      |-A user comments on a post image
-    |__A user searches for a other users
-    |_A user can follow other users
-    |_A user can open profile to update profile
-      |_A user can update profile
-    |_A user sees their own post
-    |_A user can add posts
-    |_A user can see their followers and followings
-  |-A user logs out and is redirected to login
+|_A user Registers to the website.<br>
+  |_A user Logs in<br>
+    |__A user sees images shared on the homepage.<br>
+      |_A user likes an post image.<br>
+      |-A user comments on a post image<br>
+    |__A user searches for a other users<br>
+    |_A user can follow other users<br>
+    |_A user can open profile to update profile<br>
+      |_A user can update profile<br>
+    |_A user sees their own post<br>
+    |_A user can add posts<br>
+    |_A user can see their followers and followings<br>
+  |-A user logs out and is redirected to login<br>
 
 # Features to add
 Real time display of comments and likes on homepage

@@ -25,8 +25,9 @@
 
     <div class="user-posts card col-md-12 p-0 mt-0">
       <div class="card-header bg-white d-flex align-items-center">
-        <a class="" href="{% url 'profile' %}"><img src="{{post.profile.photo_path.url}}" alt="{{post.profile.user.username}}" class="thumbnail p-0 mr-5 "></a>
-        
+        <a class="" href="{% url 'profile' %}"><img src="{{post.profile.photo_path.url}}"
+            alt="{{post.profile.user.username}}" class="thumbnail p-0 mr-5 "></a>
+
         <strong class="postusername d-flex mr-auto">@{{post.profile.user.username}}</strong>
         <strong class="ml-auto ellip"><a href="">&hellip;</a></strong>
       </div>
@@ -145,28 +146,32 @@
       <!--Loop suggestions here-->
       <div class="follow_container">
         {% for suggestion in suggestions%}
-        <form action="{% url 'follow_followed' %}" method="POST"></form>
-        <div class="follow d-flex flex-row mt-4 row">
-          {%csrf_token%}
-          <img src="{{suggestion.photo_path.url}}" alt="{{suggestion.user.username}}" class="profileimage ml-auto">
-          <span class="d-flex flex-column ml-auto"><strong>{{suggestion.user.username}}</strong>
-            <p>popular</p>
-          </span>
-          <input type="hidden" name="strangeid" value="{{suggestion.user.id}}">
-          <a class="ml-auto mr-3" href=""><button type="submit" class="bg-transparent border-0 bold">Follow</button></a>
-          </form>
-        </div>
-        {%endfor%}
+        <form action="{% url 'follow_followed' %}" method="POST">
+          <div class="follow row d-flex flex-row align-items-center justify-content-start m-1">
+            {%csrf_token%}
+            <span class="col-md-2">
+              <img src="{{suggestion.photo_path.url}}" alt="{{suggestion.user.username}}" class="profileimage">
+            </span>
+            <span class=" col-md-6 d-flex flex-column ml-auto"><strong>{{suggestion.user.username}}</strong>
+              <p>popular</p>
+            </span>
+            <span class="col-md-2 btn mt-1 follow_btn">
+              <input type="hidden" name="strangeid" value="{{suggestion.user.id}}">
+              <a class=" ml-auto" href=""><button type="submit" class="bg-transparent border-0 bold">Follow</button></a>
+            </span>
+        </form>
       </div>
-      <!--end of loop-->
-      <footer class="suggestion_footer">
-
-        <p>&copy;2021 <span class="nav-brand">Pinstagram</span></p>
-      </footer>
+      {%endfor%}
     </div>
+    <!--end of loop-->
+    <footer class="suggestion_footer">
+
+      <p>&copy;2021 <span class="nav-brand">Pinstagram</span></p>
+    </footer>
   </div>
-  <!-- section for sight balance -->
-  <div class="col-md-2 empty-section"></div>
+</div>
+<!-- section for sight balance -->
+<div class="col-md-2 empty-section"></div>
 </div>
 
 <!--Modal Window-->

@@ -15,6 +15,8 @@ from .emails import send_new_user_email
 def register_user(request):
   '''
   view function that displays to register page,  
+  sends email to user
+  redirects to login
   '''
   title = 'Register - Pinstagram'
   if request.method == 'POST':
@@ -208,6 +210,7 @@ def create_post(request):
       }
     return render(request, 'app_templates/new_post.html', context)
 
+@login_required(login_url='login')
 def search_user(request):
   title = 'search Results'
 
@@ -229,6 +232,7 @@ def search_user(request):
     return render(request, 'app_templates/search_user.html', {'messeage':message})
 
 #adds comment to posts
+@login_required(login_url='login')
 def add_comment(request):
   if request.method == 'POST':
     comment = request.POST.get('comment')
@@ -245,7 +249,8 @@ def add_comment(request):
   else:
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-#adds like function    
+#adds like function   
+@login_required(login_url='login') 
 def add_like(request):
   '''
   view function that collect like form values and creates a like
@@ -264,6 +269,7 @@ def add_like(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 #view function opening an image
+@login_required(login_url='login')
 def open_post(request, sentid):
   '''
   view function rendering to image page
@@ -309,6 +315,7 @@ def open_post(request, sentid):
   return render(request, 'app_templates/image_post.html', context)
 
 #adds a following and follow capability
+@login_required(login_url='login')
 def follow_followed(request):
   '''
   view function that enables following and follows

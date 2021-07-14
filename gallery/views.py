@@ -1,10 +1,14 @@
 from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django_heroku.core import settings
 from .forms import RegisterNewUser,AddNewPost, UpdateProfile
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import FollowChain, Follower, ImagePost, PostComment, PostLikes, UserProfile, User
 import datetime as dt
+from pinstagram import settings
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 # Create your views here.
 #register user view function
@@ -325,3 +329,18 @@ def follow_followed(request):
 
   else:
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+#sending a welcome email
+def send_new_user_email(request):
+  #creating subject and sender
+  subject = 'Welcome to Pinstagram'
+  sender = settings.EMAIL_HOST_USER
+
+  #context variables
+  text_context = render_to_string('email/welcome.txt', {'name':name})
+  html_context = render_to_string('email/welcome.html', {'name':name})
+
+  msg = EmailMultiAlternatives(subject, text_context, sender, [receiver])
+  msg.attach_alternative(html_context, 'text/html')
+  msg.send()

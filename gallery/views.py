@@ -1,3 +1,4 @@
+from os import sendfile
 from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django_heroku.core import settings
@@ -6,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import FollowChain, Follower, ImagePost, PostComment, PostLikes, UserProfile, User
 import datetime as dt
+from .emails import send_new_user_email
 
 
 # Create your views here.
@@ -18,8 +20,12 @@ def register_user(request):
   if request.method == 'POST':
     form = RegisterNewUser(request.POST)
     if form.is_valid():
+      uname = form.request.POST.get['username']
+      uemail = form.request.POST.get('email')
       form.save()
-      messages.success(request, 'Account Created Successfully!')
+      send_new_user_email(uname , uemail)
+      messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
+
       return redirect('login')
   else:
     form = RegisterNewUser

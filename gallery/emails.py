@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 
 #sending a welcome email
-def send_new_user_email(request):
+def send_new_user_email(name, receiver):
   #creating subject and sender
   subject = 'Welcome to Pinstagram'
   sender = settings.EMAIL_HOST_USER

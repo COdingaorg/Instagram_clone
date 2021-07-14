@@ -17,6 +17,12 @@
   <div class="col-md-5 row post-section">
     <div class="stories mb-10">
       <!--placeholder-->
+      <div class="stories_inner">
+        <img src="{{user_profile.photo_path.url}}" alt="{{request.user}}'s profile photo">
+      </div>
+      <p>
+        Add Stories ...
+      </p>
     </div>
     <!--posts-->
     {% if all_posts%}

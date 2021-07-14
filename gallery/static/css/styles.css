@@ -68,6 +68,7 @@ button>svg{
 .sidebar{
   height: 80vh;
 }
+
 /* styling stories section */
 .stories{
   width: 100%;
@@ -75,6 +76,26 @@ button>svg{
   background-color: white;
   border: 1px solid rgb(200, 200, 200);
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  
+}
+.stories_inner{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgb(248,75,107);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+.stories_inner>img{
+  width: 150%;
+  height: auto;
 }
 
 /*styling for body*/
